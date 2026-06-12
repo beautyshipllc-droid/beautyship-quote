@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Beauty Ship Express VIP1 平台会员报价计算器</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f4f7fb;color:#172033}.wrap{max-width:760px;margin:0 auto;padding:22px}.card{background:white;border-radius:18px;padding:22px;box-shadow:0 8px 26px rgba(20,40,80,.08);margin-bottom:16px}h1{font-size:24px;margin:0 0 6px}.sub{color:#637083;margin-bottom:18px}label{display:block;font-weight:700;margin:14px 0 8px}select,input{width:100%;box-sizing:border-box;border:1px solid #d9e1ec;border-radius:12px;padding:13px;font-size:16px;background:#fff}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}button{border:0;border-radius:12px;padding:12px;font-weight:700;font-size:15px;background:#0b66c3;color:white}.quick button{background:#eef4ff;color:#0b66c3}.result{font-size:17px;line-height:1.8;background:#f7fbff;border:1px solid #dcecff;border-radius:14px;padding:16px;white-space:pre-wrap}.big{font-size:28px;font-weight:800;color:#0b66c3}.note{font-size:13px;color:#68758a;line-height:1.6}.topnav a{display:inline-block;margin-right:8px;margin-bottom:8px;padding:9px 12px;background:#edf3fb;color:#0b66c3;text-decoration:none;border-radius:999px;font-weight:700;font-size:14px}@media(max-width:640px){.row,.quick{grid-template-columns:1fr 1fr}}
+</style></head><body><div class="wrap">
+<div class="card"><h1>Beauty Ship Express</h1><div class="sub">VIP1 平台会员 报价计算器</div><div class="topnav"><a href="index.html">首页</a><a href="retail.html">普通会员</a><a href="vip1.html">VIP1</a><a href="vip2.html">VIP2</a><a href="vip3.html">VIP3</a></div></div>
+<div class="card">
+<label>选择线路</label><select id="line"><option value="A">A-普货/保健品/奶粉 ｜ $6.20/磅</option>
+<option value="B">B-服装类 ｜ $6.20/磅</option>
+<option value="C">C-二线护肤品/鞋子/衣服/饰品 ｜ $8.20/磅</option>
+<option value="C1">C1-包包二线【$300内】 ｜ $10.80/磅</option>
+<option value="E">E-普通鞋类【一箱一双】 ｜ $6.50/磅</option>
+<option value="D">D-液体水奶 ｜ $5.80/磅</option>
+<option value="W">W-普通手表【$200内】 ｜ $10.00/磅</option>
+<option value="H">H-小家电类/胃药 ｜ $9.20/磅</option>
+<option value="U">U-回国行李 ｜ $7.50/磅</option></select>
+<div class="row"><div><label>重量 / 磅</label><input id="weight" type="number" step="0.01" min="0" placeholder="例如 3.5"></div><div><label>包裹数量</label><input id="qty" type="number" step="1" min="1" value="1"></div></div>
+<div class="row"><div><label>汇率</label><input id="rate" type="number" step="0.01" value="7.10"></div><div><label>每票减免/加收 USD</label><input id="adjust" type="number" step="0.01" value="0"></div></div>
+<div class="quick"><button onclick="setRate(6.5)">6.5</button><button onclick="setRate(6.6)">6.6</button><button onclick="setRate(6.7)">6.7</button><button onclick="setRate(6.8)">6.8</button><button onclick="setRate(6.9)">6.9</button><button onclick="setRate(7.0)">7.0</button><button onclick="setRate(7.1)">7.1</button><button onclick="setRate(7.2)">7.2</button></div>
+<label>备注 / 可选</label><input id="memo" placeholder="例如：顺丰派送到家、仅供客户参考">
+<div style="margin-top:18px"><button onclick="calc()" style="width:100%">计算报价</button></div></div>
+<div class="card"><div id="result" class="result">请输入重量后点击计算。</div><div style="margin-top:12px"><button onclick="copyResult()" style="width:100%">复制报价结果</button></div></div>
+<div class="card note">说明：实际计重按输入重量计算；进位取整线路会自动向上取整。U线、W线会自动按最低起步重量计算。</div>
+</div><script>
+const DATA={"A":{name:"A-普货/保健品/奶粉",price:6.2,min:1,mode:"actual"},"B":{name:"B-服装类",price:6.2,min:1,mode:"actual"},"C":{name:"C-二线护肤品/鞋子/衣服/饰品",price:8.2,min:1,mode:"actual"},"C1":{name:"C1-包包二线【$300内】",price:10.8,min:1,mode:"actual"},"E":{name:"E-普通鞋类【一箱一双】",price:6.5,min:1,mode:"actual"},"D":{name:"D-液体水奶",price:5.8,min:1,mode:"actual"},"W":{name:"W-普通手表【$200内】",price:10.0,min:2,mode:"ceil"},"H":{name:"H-小家电类/胃药",price:9.2,min:1,mode:"actual"},"U":{name:"U-回国行李",price:7.5,min:30,mode:"ceil"}};
+function setRate(v){document.getElementById('rate').value=v;calc();}
+function money(n){return Number(n).toFixed(2)}
+function billWeight(w,item){let bw=Math.max(Number(w)||0,item.min);if(item.mode==='ceil') bw=Math.ceil(bw);return bw}
+function calc(){const code=line.value,item=DATA[code];const w=Number(weight.value)||0, q=Math.max(1,parseInt(qty.value)||1), r=Number(rate.value)||0, adj=Number(adjust.value)||0; if(w<=0){result.textContent='请输入重量。';return} const bw=billWeight(w,item); const usdOne=bw*item.price+adj; const usd=usdOne*q; const cny=usd*r; const memo=document.getElementById('memo').value.trim(); result.innerHTML=`线路：${item.name}
+会员：VIP1 平台会员
+输入重量：${w} 磅
+计费重量：${bw} 磅
+单价：$${money(item.price)} / 磅
+数量：${q} 票
+美元合计：$${money(usd)}
+人民币参考：¥${money(cny)}
+${memo?('备注：'+memo):''}`;}
+function copyResult(){navigator.clipboard.writeText(result.innerText||result.textContent);}
+['line','weight','qty','rate','adjust','memo'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
+</script></body></html>
