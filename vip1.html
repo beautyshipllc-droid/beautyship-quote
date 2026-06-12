@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Ship Express VIP1 平台会员 报价计算器 V5.1</title>
+<style>
+:root{--blue:#0A66D1;--blue2:#EAF3FF;--bg:#F3F6FB;--text:#142033;--muted:#6B778C;--line:#DCE6F2;--red:#D7263D}
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;padding:16px;background:linear-gradient(180deg,#f7faff 0%,#eef3f9 100%);color:var(--text)}
+.card{max-width:720px;margin:0 auto;background:#fff;border-radius:24px;padding:22px;box-shadow:0 12px 34px rgba(23,50,90,.10);border:1px solid rgba(220,230,242,.9)}
+.header{padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+h1{font-size:26px;line-height:1.15;margin:0 0 8px;color:#073B86;letter-spacing:.2px}
+.sub{font-size:15px;color:var(--muted)}
+.badge{display:inline-block;margin-top:10px;padding:7px 12px;border-radius:999px;background:var(--blue2);color:var(--blue);font-weight:800;font-size:13px}
+.sectionTitle{font-size:13px;color:#7a8798;font-weight:900;letter-spacing:.06em;margin:18px 0 10px;text-transform:uppercase}
+label{display:block;font-weight:850;margin-bottom:8px;font-size:14px;line-height:1.35;color:#0F1F35}
+select,input{width:100%;font-size:17px;padding:13px 14px;border:1px solid #D7E1EE;border-radius:15px;background:#fff;color:var(--text);outline:none;transition:.15s;line-height:1.35}
+select#line{font-size:18px;font-weight:800;min-height:58px;padding-right:40px;background:#fff}
+select:focus,input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(10,102,209,.10)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 16px;margin-top:12px}
+.full{margin-top:14px}
+.rateGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:9px}
+.rateBtn{font-size:18px;padding:12px;border-radius:14px;border:1px solid #CFE0F7;background:#F1F7FF;color:var(--blue);font-weight:900;cursor:pointer}
+.rateBtn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.action{width:100%;margin-top:18px;font-size:20px;padding:15px;border:0;border-radius:16px;background:linear-gradient(180deg,#1177E8,#075FC5);color:white;font-weight:900;cursor:pointer;box-shadow:0 8px 18px rgba(10,102,209,.22)}
+.secondary{background:#253143;box-shadow:none}
+.result{margin-top:20px;padding:18px;border-radius:20px;background:#F6FAFF;border:1px solid #CFE1FA}
+.resultHead{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.totalBox{background:#fff;border:1px solid #DDE9F8;border-radius:18px;padding:14px}
+.totalLabel{font-size:13px;color:var(--muted);font-weight:800}
+.big{font-size:38px;font-weight:950;color:var(--red);margin-top:4px;line-height:1.1}
+.usd{font-size:28px;font-weight:950;color:var(--blue);margin-top:4px;line-height:1.1}
+.row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #DDE9F8;padding:10px 0;font-size:16px;gap:12px}
+.row:last-child{border-bottom:0}
+.row span{color:#526074}
+.row strong{text-align:right}
+.note{font-size:13px;color:#6A7485;margin-top:14px;line-height:1.65;background:#F8FAFD;border-radius:14px;padding:12px}
+@media(max-width:640px){body{padding:12px}.card{padding:18px;border-radius:20px}.grid,.resultHead{grid-template-columns:1fr}.rateGrid{grid-template-columns:1fr 1fr}h1{font-size:23px}select,input{font-size:17px}.big{font-size:34px}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <h1>Beauty Ship Express 美邮购</h1>
+    <div class="sub">VIP1 平台会员｜专属报价计算器 V5.1</div>
+    <div class="badge">独立报价页面</div>
+  </div>
+
+  <div class="sectionTitle">线路与基础信息</div>
+  <label>选择线路</label>
+  <select id="line" onchange="calc()">
+<option value="A">A｜普货/保健品/奶粉｜$6.20/lb</option>
+<option value="B">B｜服装衣物｜$6.20/lb</option>
+<option value="E">E｜普通鞋类（一箱一双）｜$6.50/lb</option>
+<option value="C">C｜二线护肤/饰品｜$8.20/lb</option>
+<option value="C1">C1｜二线包包（≤$300）｜$10.80/lb</option>
+<option value="D">D｜液体水奶｜$5.80/lb</option>
+<option value="H">H｜小家电/胃药｜$9.20/lb</option>
+<option value="W">W｜普通手表（≤$200）｜$10.00/lb</option>
+<option value="U">U｜回国行李｜$7.50/lb</option>
+  </select>
+
+  <div class="grid full">
+    <div><label>重量 / lb</label><input id="weight" type="number" inputmode="decimal" step="0.1" placeholder="例如 5.2" oninput="calc()"></div>
+    <div><label>商品价值 / USD（可选）</label><input id="value" type="number" inputmode="decimal" step="0.01" value="0" oninput="calc()"></div>
+  </div>
+
+  
+  <div class="grid">
+    <div><label>固定利润 / USD（可选）</label><input id="profitUsd" type="number" inputmode="decimal" step="0.01" value="0" oninput="calc()"></div>
+    <div><label>固定利润 / RMB（可选）</label><input id="profitRmb" type="number" inputmode="decimal" step="0.1" value="0" oninput="calc()"></div>
+  </div>
+
+  <div class="grid full">
+    <div><label>人民币汇率</label><input id="ex" type="number" inputmode="decimal" step="0.1" value="7.1" oninput="manualRate()"></div>
+    <div><label>操作费 / 打包费 USD（可选）</label><input id="fee" type="number" inputmode="decimal" step="0.01" value="0" oninput="calc()"></div>
+  </div>
+
+  <div class="rateGrid">
+    <button class="rateBtn" type="button" onclick="setRate(6.5)">6.5</button><button class="rateBtn" type="button" onclick="setRate(6.6)">6.6</button><button class="rateBtn" type="button" onclick="setRate(6.7)">6.7</button><button class="rateBtn" type="button" onclick="setRate(6.8)">6.8</button>
+    <button class="rateBtn" type="button" onclick="setRate(6.9)">6.9</button><button class="rateBtn" type="button" onclick="setRate(7.0)">7.0</button><button class="rateBtn" type="button" onclick="setRate(7.1)">7.1</button><button class="rateBtn" type="button" onclick="setRate(7.2)">7.2</button>
+  </div>
+
+  <button class="action" onclick="calc()">计算报价</button>
+
+  <div class="result">
+    <div class="resultHead">
+      <div class="totalBox"><div class="totalLabel">人民币总价</div><div class="big" id="rmb">¥0.0</div></div>
+      <div class="totalBox"><div class="totalLabel">美元总价</div><div class="usd" id="usd">$0.0</div></div>
+    </div>
+    <div class="row"><span>当前线路</span><strong id="lineOut">-</strong></div>
+    <div class="row"><span>计费模式</span><strong id="modeOut">-</strong></div>
+    <div class="row"><span>起步重量</span><strong id="minOut">-</strong></div>
+    <div class="row"><span>实际重量</span><strong id="actual">0 lb</strong></div>
+    <div class="row"><span>计费重量</span><strong id="bill">0 lb</strong></div>
+    <div class="row"><span>运费单价</span><strong id="rateOut">$0.0/lb</strong></div>
+    <div class="row"><span>国际运费</span><strong id="ship">$0.0</strong></div>
+    <div class="row"><span>商品价值</span><strong id="valueOut">$0.0</strong></div>
+    <div class="row"><span>操作费 / 打包费</span><strong id="feeOut">$0.0</strong></div>
+    <div class="row"><span>固定利润/USD</span><strong id="profitUsdOut">$0.0</strong></div>
+    <div class="row"><span>固定利润/RMB</span><strong id="profitRmbOut">¥0.0</strong></div>
+    <div class="row"><span>人民币汇率</span><strong id="exOut">7.1</strong></div>
+  </div>
+
+  <button class="action" onclick="copyTotal()">复制总价</button>
+  <button class="action secondary" onclick="copyDetail()">复制报价文案</button>
+
+  <div class="note">计费规则：A/B/E/C/C1/D/H 为实际计重；W线进位取整并按2磅起；U线进位取整并按30磅起。操作费/打包费、固定利润和人民币汇率会自动记住。</div>
+</div>
+<script>
+const lines={'A':{name:'A｜普货/保健品/奶粉',rate:6.20,min:1,mode:'actual',modeText:'实际计重'},
+'B':{name:'B｜服装衣物',rate:6.20,min:1,mode:'actual',modeText:'实际计重'},
+'E':{name:'E｜普通鞋类（一箱一双）',rate:6.50,min:1,mode:'actual',modeText:'实际计重'},
+'C':{name:'C｜二线护肤/饰品',rate:8.20,min:1,mode:'actual',modeText:'实际计重'},
+'C1':{name:'C1｜二线包包（≤$300）',rate:10.80,min:1,mode:'actual',modeText:'实际计重'},
+'D':{name:'D｜液体水奶',rate:5.80,min:1,mode:'actual',modeText:'实际计重'},
+'H':{name:'H｜小家电/胃药',rate:9.20,min:1,mode:'actual',modeText:'实际计重'},
+'W':{name:'W｜普通手表（≤$200）',rate:10.00,min:2,mode:'ceil',modeText:'进位取整'},
+'U':{name:'U｜回国行李',rate:7.50,min:30,mode:'ceil',modeText:'进位取整'}};
+const storePrefix="beauty_v4_vip1_";
+function n(id){return parseFloat(document.getElementById(id).value)||0}
+function usd1(x){return "$"+Number(x||0).toFixed(1)}
+function rmb1(x){return "¥"+Number(x||0).toFixed(1)}
+function ex1(x){return Number(x||0).toFixed(1)}
+function calcBillWeight(weight,line){
+  if(weight<=0) return 0;
+  let base=Math.max(weight,line.min);
+  return line.mode==='ceil' ? Math.ceil(base) : base;
+}
+function getData(){
+  let key=document.getElementById("line").value,line=lines[key];
+  let weight=n("weight"),value=n("value"),fee=n("fee"),profitUsd=n("profitUsd"),profitRmb=n("profitRmb"),ex=n("ex");
+  let bill=calcBillWeight(weight,line);
+  let ship=bill*line.rate;
+  let totalUsd=ship+value+fee+profitUsd+(ex>0?profitRmb/ex:0);
+  let totalRmb=(ship+value+fee+profitUsd)*ex+profitRmb;
+  return {key,name:line.name,rate:line.rate,min:line.min,mode:line.mode,modeText:line.modeText,weight,value,fee,profitUsd,profitRmb,ex,bill,ship,totalUsd,totalRmb};
+}
+function weightText(x){return Number(x||0).toFixed(2).replace(/\.00$/,"")+" lb"}
+function updateRateButtons(){let current=ex1(n("ex"));document.querySelectorAll(".rateBtn").forEach(btn=>btn.classList.toggle("active",ex1(parseFloat(btn.innerText))===current));}
+function setRate(v){document.getElementById("ex").value=ex1(v);calc()}
+function manualRate(){document.getElementById("ex").value=ex1(n("ex"));calc()}
+function calc(){
+  let d=getData();
+  ["fee","profitUsd","profitRmb"].forEach(id=>localStorage.setItem(storePrefix+id,document.getElementById(id).value));
+  localStorage.setItem(storePrefix+"ex",ex1(d.ex));
+  document.getElementById("rmb").innerText=rmb1(d.totalRmb);document.getElementById("usd").innerText=usd1(d.totalUsd);
+  document.getElementById("lineOut").innerText=d.name;document.getElementById("modeOut").innerText=d.modeText;document.getElementById("minOut").innerText=weightText(d.min);
+  document.getElementById("actual").innerText=weightText(d.weight);document.getElementById("bill").innerText=weightText(d.bill);
+  document.getElementById("rateOut").innerText=usd1(d.rate)+"/lb";document.getElementById("ship").innerText=usd1(d.ship);
+  document.getElementById("valueOut").innerText=usd1(d.value);document.getElementById("feeOut").innerText=usd1(d.fee);
+  document.getElementById("profitUsdOut").innerText=usd1(d.profitUsd);document.getElementById("profitRmbOut").innerText=rmb1(d.profitRmb);document.getElementById("exOut").innerText=ex1(d.ex);
+  updateRateButtons();return d;
+}
+function copyText(t){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>alert("已复制"))}else{prompt("复制以下内容：",t)}}
+function copyTotal(){let d=calc();copyText(rmb1(d.totalRmb))}
+function copyDetail(){let d=calc();copyText(`Beauty Ship Express 美邮购
+会员：VIP1 平台会员
+线路：${d.name}
+计费模式：${d.modeText}
+起步重量：${weightText(d.min)}
+实际重量：${weightText(d.weight)}
+计费重量：${weightText(d.bill)}
+单价：${usd1(d.rate)}/lb
+
+国际运费：${usd1(d.ship)}
+商品价值：${usd1(d.value)}
+操作费/打包费：${usd1(d.fee)}
+服务费：${usd1(d.profitUsd)}
+人民币服务费：${rmb1(d.profitRmb)}
+
+美元总价：${usd1(d.totalUsd)}
+人民币汇率：${ex1(d.ex)}
+人民币应付：${rmb1(d.totalRmb)}`)}
+window.onload=function(){["fee","profitUsd","profitRmb","ex"].forEach(id=>{let v=localStorage.getItem(storePrefix+id);if(v!==null)document.getElementById(id).value=v});calc();}
+</script>
+</body>
+</html>
