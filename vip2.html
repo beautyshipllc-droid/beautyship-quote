@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beauty Ship Express VIP2 代购会员 专属报价计算器 V5.5</title>
+<style>
+:root{--blue:#0969da;--dark:#0f1b2d;--muted:#667085;--line:#d9e2ef;--bg:#f3f7ff;--card:#fff;--soft:#eef5ff;--danger:#d21f52;}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#f7fbff,#eef5ff);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--dark);}
+.wrap{max-width:900px;margin:0 auto;padding:18px 10px 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:28px;box-shadow:0 18px 40px rgba(15,55,110,.08)}
+h1{margin:0 0 6px;color:#003b86;font-size:34px;line-height:1.12;font-weight:900;letter-spacing:-.5px}
+.sub{font-size:18px;color:var(--muted);font-weight:600;margin-bottom:14px}
+.member-level{color:#e60012;font-weight:950}
+.calc-version{color:var(--muted);font-weight:700}
+.pill{display:inline-block;background:var(--soft);color:#0666d6;border-radius:18px;padding:9px 17px;font-weight:850;margin:0 0 22px}
+hr{border:0;border-top:1px solid var(--line);margin:0 0 22px}
+label{display:block;font-size:16px;font-weight:950;margin:0 0 9px;color:#07162d;line-height:1.2}.field-hint{margin-top:8px;color:#667085;font-size:13px;font-weight:700;line-height:1.45}
+select,input{width:100%;height:58px;border:1.5px solid var(--line);border-radius:16px;background:#fff;padding:0 16px;font-size:20px;font-weight:850;color:#07162d;outline:none}
+select:focus,input:focus{border-color:#7db6ff;box-shadow:0 0 0 4px rgba(9,105,218,.11)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field-card{border:1px solid #dbe7f7;background:#fbfdff;border-radius:20px;padding:14px;box-shadow:0 4px 14px rgba(15,55,110,.035)}
+.field-card.full{grid-column:1/-1}
+.field-card input,.field-card select{height:56px;font-size:19px}
+.fx-adjust{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:8px;align-items:center}
+.fx-btn{width:100%;height:56px;border:1px solid #cfe0f8;background:#eef5ff;color:#0969da;border-radius:16px;font-size:17px;font-weight:950}
+.fx-adjust input{text-align:center;padding:0 6px}
+.fx-btn:active{transform:scale(.98)}
+details.more{grid-column:1/-1;border:1px solid #dbe7f7;background:#fbfdff;border-radius:20px;padding:0;overflow:hidden}
+details.more summary{cursor:pointer;list-style:none;padding:16px 16px;font-size:16px;font-weight:950;color:#0969da;background:#f3f8ff}
+details.more summary::-webkit-details-marker{display:none}
+details.more .more-body{padding:14px}
+.mainbtn,.copy-main,.copy-dark{width:100%;height:74px;border:0;border-radius:18px;color:#fff;font-size:25px;font-weight:950}
+.copy-main{background:linear-gradient(180deg,#1683f4,#0067d8);box-shadow:0 10px 24px rgba(9,105,218,.22)}
+.copy-dark{background:#263448;margin-top:16px}
+.result{margin-top:24px;border:1px solid #cfe0f8;background:#f7fbff;border-radius:22px;padding:22px;display:none}
+.total-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.total-card{background:#fff;border:1px solid #dbe7f7;border-radius:18px;padding:18px 20px}
+.total-label{font-size:14px;color:#667085;font-weight:800;margin-bottom:6px}
+.total-rmb{font-size:36px;font-weight:1000;color:#d21f52;line-height:1}
+.total-usd{font-size:36px;font-weight:1000;color:#0969da;line-height:1}
+.detail-table{border-top:1px solid #dbe7f7;margin-top:6px}
+.row{display:grid;grid-template-columns:1fr auto;gap:14px;border-bottom:1px solid #dbe7f7;padding:12px 0;font-size:17px}
+.row .k{color:#667085;font-weight:750}
+.row .v{color:#07162d;font-weight:950;text-align:right}
+.notice{margin-top:18px;background:#f7fbff;border-radius:14px;padding:14px;color:#667085;font-size:14px;line-height:1.65}
+@media(max-width:768px){
+  .wrap{padding:10px 8px 22px}.card{border-radius:22px;padding:22px 16px}h1{font-size:26px;white-space:normal}.sub{font-size:16px}
+  .form-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .field-card{border-radius:18px;padding:11px}
+  label{font-size:14px;margin-bottom:7px;min-height:auto}
+  select,input{height:52px;font-size:16px;padding:0 10px;border-radius:14px}
+  .field-card input,.field-card select{height:50px;font-size:16px}
+  .fx-adjust{gap:6px}
+  .fx-btn{height:50px;border-radius:14px;font-size:14px}
+  details.more summary{padding:14px;font-size:15px}
+  details.more .more-body{padding:11px}
+  .copy-main,.copy-dark{height:62px;font-size:21px}
+  .result{padding:16px}
+  .total-grid{gap:10px}
+  .total-card{padding:14px 12px}
+  .total-rmb,.total-usd{font-size:29px}
+  .row{font-size:15px;padding:10px 0}
+}
+@media(max-width:768px){.field-hint{font-size:12px;margin-top:7px}}
+@media(max-width:360px){.card{padding:18px 12px}label{font-size:13px}select,input{font-size:15px;padding:0 8px}.field-card{padding:9px}.total-rmb,.total-usd{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h1>Beauty Ship Express 美邮购</h1>
+<div class="sub"><span class="member-level">VIP2 代购会员</span><span class="calc-version">｜专属报价计算器 V5.5</span></div>
+<div class="pill">独立报价页面</div><hr>
+
+<div class="form-grid">
+  <div class="field-card full">
+    <label>美元兑美元兑人民币汇率</label>
+    <div class="fx-adjust">
+      <button class="fx-btn" type="button" onclick="adjustFx(-0.1)">-0.1</button>
+      <input id="fx" inputmode="decimal" value="6.8">
+      <button class="fx-btn" type="button" onclick="adjustFx(0.1)">+0.1</button>
+    </div>
+  </div>
+
+  <div class="field-card">
+    <label>固定利润（USD 美元，可选）</label>
+    <input id="profitUsd" inputmode="decimal" value="0">
+  </div>
+  <div class="field-card">
+    <label>固定利润（RMB 人民币，可选）</label>
+    <input id="profitRmb" inputmode="decimal" value="0">
+  </div>
+
+  <div class="field-card">
+    <label>商品价值（USD 美元）</label>
+    <input id="value" inputmode="decimal" value="0">
+  </div>
+  <div class="field-card">
+    <label>重量（LB 磅）</label>
+    <input id="weight" inputmode="decimal" value="0">
+  </div>
+
+  <div class="field-card full">
+    <label>选择运输线路</label>
+    <select id="route"></select>
+    <div class="field-hint">请选择符合商品类型的运输线路</div>
+  </div>
+
+  <details class="more">
+    <summary>更多设置（可选）</summary>
+    <div class="more-body">
+      <label>操作费 / 打包费（USD 美元，可选）</label>
+      <input id="opFee" inputmode="decimal" value="0">
+    </div>
+  </details>
+</div>
+
+<div class="result" id="result">
+  <div class="total-grid">
+    <div class="total-card"><div class="total-label">人民币总价</div><div class="total-rmb" id="rmbTotal">¥0.0</div></div>
+    <div class="total-card"><div class="total-label">美元总价</div><div class="total-usd" id="usdTotal">$0.0</div></div>
+  </div>
+  <div class="detail-table" id="detailTable"></div>
+</div>
+<button class="copy-main" style="margin-top:18px" onclick="copyTotal()">复制总价</button>
+<button class="copy-dark" onclick="copyWechat()">复制报价文案</button>
+<div class="notice">计费规则：A/B/E/C/C1/D/H 为实际计重；W线进位取整并按2磅起；U线进位取整并按30磅起。美元兑美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
+</div></div>
+<script>
+const MEMBER_TITLE="VIP2 代购会员";
+const VERSION='V5.5';
+const ROUTES=[{"code":"A","name":"普货 / 保健品 / 奶粉","rate":7.0,"minWeight":0},{"code":"B","name":"服装类","rate":7.0,"minWeight":0},{"code":"C","name":"二线护肤品 / 鞋服 / 饰品","rate":9.0,"minWeight":0},{"code":"C1","name":"二线品牌包包（$300内）","rate":12.0,"minWeight":0},{"code":"E","name":"普通鞋类（一箱一双）","rate":7.5,"minWeight":0},{"code":"D","name":"液体水奶","rate":7.5,"minWeight":0},{"code":"W","name":"普通手表（$200内）","rate":10.0,"minWeight":2},{"code":"H","name":"小家电 / 胃药","rate":9.0,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
+let lastText='', lastTotal='';
+function $(id){return document.getElementById(id)}
+function money(n,d=1){return Number(n||0).toFixed(d)}
+function num(id){const v=parseFloat($(id).value); return isNaN(v)?0:v}
+function init(){
+  $('route').innerHTML=ROUTES.map((r,i)=>`<option value="${i}">${r.code}｜${r.name}｜$${Number(r.rate).toFixed(2)}/lb</option>`).join('');
+  const resetKey=location.pathname+'_uiVersion';
+  if(localStorage.getItem(resetKey)!==VERSION){
+    const defaults={weight:'0',value:'0',profitUsd:'0',profitRmb:'0',fx:'6.8',opFee:'0'};
+    Object.keys(defaults).forEach(id=>localStorage.setItem(location.pathname+'_'+id,defaults[id]));
+    localStorage.setItem(resetKey,VERSION);
+  }
+  ['weight','value','profitUsd','profitRmb','fx','opFee','route'].forEach(id=>{
+    const key=location.pathname+'_'+id; const s=localStorage.getItem(key); if(s!==null)$(id).value=s;
+    $(id).addEventListener('input',()=>{localStorage.setItem(key,$(id).value);calc(true);});
+    $(id).addEventListener('change',()=>{localStorage.setItem(key,$(id).value);calc(true);});
+  });
+}
+function adjustFx(step){const current=parseFloat($('fx').value)||6.8; const next=Math.round((current+step)*10)/10; $('fx').value=next.toFixed(1); localStorage.setItem(location.pathname+'_fx',$('fx').value); calc(true)}
+function calc(silent=false){
+  const r=ROUTES[parseInt($('route').value||0)]; const w=num('weight');
+  const minW=r.minWeight||0; const bill=w>0?Math.max(Math.ceil(w), minW):0; const value=w>0?num('value'):0, profitUsd=w>0?num('profitUsd'):0, profitRmb=w>0?num('profitRmb'):0, fx=num('fx')||6.8, op=w>0?num('opFee'):0;
+  const freight=bill*r.rate; const usdTotal=value+freight+profitUsd+op; const rmbTotal=usdTotal*fx+profitRmb;
+  const mode=minW>0?`进位取整，${minW} lb起`:'实际计重';
+  $('rmbTotal').innerText=`¥${money(rmbTotal)}`; $('usdTotal').innerText=`$${money(usdTotal)}`;
+  const rows=[
+    ['当前线路',`${r.code}｜${r.name}`],['计费模式',mode],['起步重量',`${minW||1} lb`],['实际重量',`${money(w)} lb`],['计费重量',`${bill} lb`],['运费单价',`$${money(r.rate)}/lb（每磅）`],['国际运费',`$${money(freight)}`],['商品价值',`$${money(value)}`],['操作费 / 打包费',`$${money(op)}`],['固定利润（USD 美元）',`$${money(profitUsd)}`],['固定利润（RMB 人民币）',`¥${money(profitRmb)}`],['美元兑美元兑人民币汇率',`${money(fx)}`]
+  ];
+  $('detailTable').innerHTML=rows.map(([k,v])=>`<div class="row"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+  $('result').style.display='block';
+  lastTotal=`¥${money(rmbTotal)}`;
+  lastText=`Beauty Ship Express 美邮购
+${MEMBER_TITLE}｜专属报价计算器 ${VERSION}
+线路：${r.code}｜${r.name}
+实际重量：${money(w)} lb
+计费重量：${bill} lb
+运费单价：$${money(r.rate)}/lb
+国际运费：$${money(freight)}
+商品价值：$${money(value)}
+操作费/打包费：$${money(op)}
+固定利润（USD 美元）：$${money(profitUsd)}
+固定利润（RMB 人民币）：¥${money(profitRmb)}
+美元兑美元兑人民币汇率：${money(fx)}
+美元总价：$${money(usdTotal)}
+人民币总价：¥${money(rmbTotal)}`;
+  return true;
+}
+async function cp(t){try{await navigator.clipboard.writeText(t);alert('已复制')}catch(e){prompt('请手动复制',t)}}
+function copyTotal(){if(!lastTotal){if(!calc())return;} cp(lastTotal)}
+function copyWechat(){if(!lastText){if(!calc())return;} cp(lastText)}
+init();
+calc(true);
+</script>
+</body>
+</html>
