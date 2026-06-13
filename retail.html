@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Beauty Ship Express 普通会员 专属报价计算器 V6.0</title>
+<title>Beauty Ship Express 普通会员 专属报价计算器 V6.1</title>
 <style>
 :root{--blue:#0969da;--dark:#0f1b2d;--muted:#667085;--line:#d9e2ef;--bg:#f3f7ff;--card:#fff;--soft:#eef5ff;--danger:#d21f52;}
 *{box-sizing:border-box}
@@ -70,7 +70,7 @@ details.more .more-body{padding:14px}
 <body>
 <div class="wrap"><div class="card">
 <h1>Beauty Ship Express 美邮购</h1>
-<div class="sub"><span class="member-level">普通会员</span><span class="calc-version">｜专属报价计算器 V6.0</span></div>
+<div class="sub"><span class="member-level">普通会员</span><span class="calc-version">｜专属报价计算器 V6.1</span></div>
 <div class="pill">独立报价页面</div><hr>
 
 <div class="form-grid">
@@ -129,8 +129,8 @@ details.more .more-body{padding:14px}
 </div></div>
 <script>
 const MEMBER_TITLE="普通会员";
-const VERSION='V6.0';
-const ROUTES=[{"code":"A","name":"普货 / 保健品 / 奶粉","rate":7.0,"minWeight":0},{"code":"B","name":"服装类","rate":7.0,"minWeight":0},{"code":"C","name":"二线护肤品 / 鞋服 / 饰品","rate":9.0,"minWeight":0},{"code":"C1","name":"二线箱包（$300内）","rate":12.0,"minWeight":0},{"code":"E","name":"普通鞋类（一箱一双）","rate":7.5,"minWeight":0},{"code":"D","name":"液体水奶","rate":6.0,"minWeight":0},{"code":"W","name":"普通手表（$200内）","rate":10.0,"minWeight":2},{"code":"H","name":"小家电 / 胃药","rate":9.5,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
+const VERSION='V6.1';
+const ROUTES=[{"code":"A","name":"普货/保健品/奶粉","rate":7.0,"minWeight":0},{"code":"B","name":"服装类","rate":7.0,"minWeight":0},{"code":"C","name":"二线护肤品/鞋服/饰品","rate":9.0,"minWeight":0},{"code":"C1","name":"二线箱包","rate":12.0,"minWeight":0},{"code":"E","name":"普通鞋类","rate":7.5,"minWeight":0},{"code":"D","name":"液体水奶","rate":6.0,"minWeight":0},{"code":"W","name":"普通手表","rate":10.0,"minWeight":2},{"code":"H","name":"小家电/胃药","rate":9.5,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
 let lastText='', lastTotal='';
 function $(id){return document.getElementById(id)}
 function money(n,d=1){return Number(n||0).toFixed(d)}
