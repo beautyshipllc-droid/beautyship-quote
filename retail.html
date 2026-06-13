@@ -125,7 +125,7 @@ details.more .more-body{padding:14px}
 </div>
 <button class="copy-main" style="margin-top:18px" onclick="copyTotal()">复制总价</button>
 <button class="copy-dark" onclick="copyWechat()">复制报价文案</button>
-<div class="notice">计费规则：A/B/E/C/C1/D/H 为实际计重；W线进位取整并按2磅起；U线进位取整并按30磅起。美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
+<div class="notice">计费规则：A/B/C/C1/D/E/H 为实际计重，1.0磅起计费；超过1.0磅按实重收费。0.1磅为最小计费单位，不足0.1磅按0.1磅进位计算。W线为跳磅进位整取，2磅起计费；U线为跳磅进位整取，30磅起计费。美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
 </div></div>
 <script>
 const MEMBER_TITLE="普通会员";
@@ -150,11 +150,17 @@ function init(){
   });
 }
 function adjustFx(step){const current=parseFloat($('fx').value)||6.8; const next=Math.round((current+step)*10)/10; $('fx').value=next.toFixed(1); localStorage.setItem(location.pathname+'_fx',$('fx').value); calc(true)}
+function billingWeight(w, r){
+  if(w<=0) return 0;
+  const minW=r.minWeight||0;
+  if(minW>0) return Math.max(Math.ceil(w), minW);
+  return Math.max(Math.ceil(w*10)/10, 1);
+}
 function calc(silent=false){
   const r=ROUTES[parseInt($('route').value||0)]; const w=num('weight');
-  const minW=r.minWeight||0; const bill=w>0?Math.max(Math.ceil(w), minW):0; const value=w>0?num('value'):0, profitUsd=w>0?num('profitUsd'):0, profitRmb=w>0?num('profitRmb'):0, fx=num('fx')||6.8, op=w>0?num('opFee'):0;
+  const minW=r.minWeight||0; const bill=billingWeight(w,r); const value=w>0?num('value'):0, profitUsd=w>0?num('profitUsd'):0, profitRmb=w>0?num('profitRmb'):0, fx=num('fx')||6.8, op=w>0?num('opFee'):0;
   const freight=bill*r.rate; const usdTotal=value+freight+profitUsd+op; const rmbTotal=usdTotal*fx+profitRmb;
-  const mode=minW>0?`进位取整，${minW} lb起`:'实际计重';
+  const mode=minW>0?`跳磅进位整取，${minW} lb起`:'实际计重，1.0 lb起，0.1 lb进位';
   $('rmbTotal').innerText=`¥${money(rmbTotal)}`; $('usdTotal').innerText=`$${money(usdTotal)}`;
   const rows=[
     ['当前线路',`${r.code}｜${r.name}`],['计费模式',mode],['起步重量',`${minW||1} lb`],['实际重量',`${money(w)} lb`],['计费重量',`${bill} lb`],['运费单价',`$${money(r.rate)}/lb（每磅）`],['国际运费',`$${money(freight)}`],['商品价值',`$${money(value)}`],['操作费 / 打包费',`$${money(op)}`],['固定利润（USD 美元）',`$${money(profitUsd)}`],['固定利润（RMB 人民币）',`¥${money(profitRmb)}`],['美元兑人民币汇率',`${money(fx)}`]
