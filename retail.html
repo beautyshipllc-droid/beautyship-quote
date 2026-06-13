@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Beauty Ship Express 普通会员 专属报价计算器 V6.1</title>
+<title>Beauty Ship Express 普通会员 专属报价计算器 V6.2</title>
 <style>
 :root{--blue:#0969da;--dark:#0f1b2d;--muted:#667085;--line:#d9e2ef;--bg:#f3f7ff;--card:#fff;--soft:#eef5ff;--danger:#d21f52;}
 *{box-sizing:border-box}
@@ -28,9 +28,13 @@ select:focus,input:focus{border-color:#7db6ff;box-shadow:0 0 0 4px rgba(9,105,21
 .fx-adjust input{text-align:center;padding:0 6px}
 .fx-btn:active{transform:scale(.98)}
 details.more{grid-column:1/-1;border:1px solid #dbe7f7;background:#fbfdff;border-radius:20px;padding:0;overflow:hidden}
-details.more summary{cursor:pointer;list-style:none;padding:16px 16px;font-size:16px;font-weight:950;color:#0969da;background:#f3f8ff}
+details.more summary{cursor:pointer;list-style:none;padding:16px 16px;font-size:16px;font-weight:950;color:#ff7a00;background:rgba(255,122,0,.09);border-bottom:1px solid rgba(255,122,0,.16)}
 details.more summary::-webkit-details-marker{display:none}
 details.more .more-body{padding:14px}
+.special-row{display:flex;align-items:flex-start;gap:10px;margin-top:4px;padding:12px;border:1px solid rgba(255,122,0,.18);background:rgba(255,122,0,.055);border-radius:16px}
+.special-row input{width:18px;height:18px;margin-top:2px;flex:0 0 auto}
+.special-row span{font-size:15px;font-weight:900;color:#07162d;line-height:1.35}
+.special-desc{margin-top:8px;color:#667085;font-size:13px;font-weight:700;line-height:1.5}
 .mainbtn,.copy-main,.copy-dark{width:100%;height:74px;border:0;border-radius:18px;color:#fff;font-size:25px;font-weight:950}
 .copy-main{background:linear-gradient(180deg,#1683f4,#0067d8);box-shadow:0 10px 24px rgba(9,105,218,.22)}
 .copy-dark{background:#263448;margin-top:16px}
@@ -56,6 +60,9 @@ details.more .more-body{padding:14px}
   .fx-btn{height:50px;border-radius:14px;font-size:14px}
   details.more summary{padding:14px;font-size:15px}
   details.more .more-body{padding:11px}
+  .special-row{padding:10px}
+  .special-row span{font-size:14px}
+  .special-desc{font-size:12px}
   .copy-main,.copy-dark{height:62px;font-size:21px}
   .result{padding:16px}
   .total-grid{gap:10px}
@@ -70,7 +77,7 @@ details.more .more-body{padding:14px}
 <body>
 <div class="wrap"><div class="card">
 <h1>Beauty Ship Express 美邮购</h1>
-<div class="sub"><span class="member-level">普通会员</span><span class="calc-version">｜专属报价计算器 V6.1</span></div>
+<div class="sub"><span class="member-level">普通会员</span><span class="calc-version">｜专属报价计算器 V6.2</span></div>
 <div class="pill">独立报价页面</div><hr>
 
 <div class="form-grid">
@@ -108,10 +115,18 @@ details.more .more-body{padding:14px}
   </div>
 
   <details class="more">
-    <summary>更多设置（可选）</summary>
+    <summary>⚙️ 更多设置（可选）</summary>
     <div class="more-body">
       <label>操作费 / 打包费（USD 美元，可选）</label>
       <input id="opFee" inputmode="decimal" value="0">
+
+      <div style="height:14px"></div>
+      <label>特殊地区派送（可选）</label>
+      <label class="special-row">
+        <input type="checkbox" id="specialAreaFee">
+        <span>新疆 / 西藏 / 海南 / 青海（+$3/票）</span>
+      </label>
+      <div class="special-desc">收件地址位于新疆、西藏、海南或青海地区时，每票包裹需加收 $3 派送服务费。</div>
     </div>
   </details>
 </div>
@@ -125,11 +140,11 @@ details.more .more-body{padding:14px}
 </div>
 <button class="copy-main" style="margin-top:18px" onclick="copyTotal()">复制总价</button>
 <button class="copy-dark" onclick="copyWechat()">复制报价文案</button>
-<div class="notice">计费规则：A/B/C/C1/D/E/H 为实际计重，1.0磅起计费；超过1.0磅按实重收费。0.1磅为最小计费单位，不足0.1磅按0.1磅进位计算。W线为跳磅进位整取，2磅起计费；U线为跳磅进位整取，30磅起计费。特别说明：美元总价仅显示运费成本，不包含商品价值、固定利润（USD）和固定利润（RMB）；最终客户报价请以人民币总价为准。美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
+<div class="notice">计费规则：A/B/C/C1/D/E/H 为实际计重，1.0磅起计费；超过1.0磅按实重收费。0.1磅为最小计费单位，不足0.1磅按0.1磅进位计算。W线为跳磅进位整取，2磅起计费；U线为跳磅进位整取，30磅起计费。特别说明：美元总价显示真实运费成本，包含国际运费、操作费/打包费和特殊地区派送费，不包含商品价值、固定利润（USD）和固定利润（RMB）；最终客户报价请以人民币总价为准。美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
 </div></div>
 <script>
 const MEMBER_TITLE="普通会员";
-const VERSION='V6.1';
+const VERSION='V6.2';
 const ROUTES=[{"code":"A","name":"普货/保健品/奶粉","rate":7.0,"minWeight":0},{"code":"B","name":"服装类","rate":7.0,"minWeight":0},{"code":"C","name":"二线护肤品/鞋服/饰品","rate":9.0,"minWeight":0},{"code":"C1","name":"二线箱包","rate":12.0,"minWeight":0},{"code":"E","name":"普通鞋类","rate":7.5,"minWeight":0},{"code":"D","name":"液体水奶","rate":6.0,"minWeight":0},{"code":"W","name":"普通手表","rate":10.0,"minWeight":2},{"code":"H","name":"小家电/胃药","rate":9.5,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
 let lastText='', lastTotal='';
 function $(id){return document.getElementById(id)}
@@ -148,6 +163,10 @@ function init(){
     $(id).addEventListener('input',()=>{localStorage.setItem(key,$(id).value);calc(true);});
     $(id).addEventListener('change',()=>{localStorage.setItem(key,$(id).value);calc(true);});
   });
+  const specialKey=location.pathname+'_specialAreaFee';
+  const specialSaved=localStorage.getItem(specialKey);
+  if(specialSaved!==null && $('specialAreaFee')) $('specialAreaFee').checked=specialSaved==='1';
+  if($('specialAreaFee')) $('specialAreaFee').addEventListener('change',()=>{localStorage.setItem(specialKey,$('specialAreaFee').checked?'1':'0');calc(true);});
 }
 function adjustFx(step){const current=parseFloat($('fx').value)||6.8; const next=Math.round((current+step)*10)/10; $('fx').value=next.toFixed(1); localStorage.setItem(location.pathname+'_fx',$('fx').value); calc(true)}
 function billingWeight(w, r){
@@ -159,11 +178,12 @@ function billingWeight(w, r){
 function calc(silent=false){
   const r=ROUTES[parseInt($('route').value||0)]; const w=num('weight');
   const minW=r.minWeight||0; const bill=billingWeight(w,r); const value=w>0?num('value'):0, profitUsd=w>0?num('profitUsd'):0, profitRmb=w>0?num('profitRmb'):0, fx=num('fx')||6.8, op=w>0?num('opFee'):0;
-  const freight=bill*r.rate; const usdCost=freight+op; const rmbTotal=(value+freight+op+profitUsd)*fx+profitRmb;
+  const specialFee=(w>0 && $('specialAreaFee') && $('specialAreaFee').checked)?3:0;
+  const freight=bill*r.rate; const usdCost=freight+op+specialFee; const rmbTotal=(value+freight+op+specialFee+profitUsd)*fx+profitRmb;
   const mode=minW>0?`跳磅进位整取，${minW} lb起`:'实际计重，1.0 lb起，0.1 lb进位';
   $('rmbTotal').innerText=`¥${money(rmbTotal)}`; $('usdTotal').innerText=`$${money(usdCost)}`;
   const rows=[
-    ['当前线路',`${r.code}｜${r.name}`],['计费模式',mode],['起步重量',`${minW||1} lb`],['实际重量',`${money(w)} lb`],['计费重量',`${bill} lb`],['运费单价',`$${money(r.rate)}/lb（每磅）`],['国际运费',`$${money(freight)}`],['美元总价（运费成本）',`$${money(usdCost)}`],['商品价值',`$${money(value)}`],['操作费 / 打包费',`$${money(op)}`],['固定利润（USD 美元）',`$${money(profitUsd)}`],['固定利润（RMB 人民币）',`¥${money(profitRmb)}`],['美元兑人民币汇率',`${money(fx)}`]
+    ['当前线路',`${r.code}｜${r.name}`],['计费模式',mode],['起步重量',`${minW||1} lb`],['实际重量',`${money(w)} lb`],['计费重量',`${bill} lb`],['运费单价',`$${money(r.rate)}/lb（每磅）`],['国际运费',`$${money(freight)}`],['美元总价（运费成本）',`$${money(usdCost)}`],['商品价值',`$${money(value)}`],['操作费 / 打包费',`$${money(op)}`],...(specialFee>0?[['特殊地区派送费',`$${money(specialFee)}`]]:[]),['固定利润（USD 美元）',`$${money(profitUsd)}`],['固定利润（RMB 人民币）',`¥${money(profitRmb)}`],['美元兑人民币汇率',`${money(fx)}`]
   ];
   $('detailTable').innerHTML=rows.map(([k,v])=>`<div class="row"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
   $('result').style.display='block';
@@ -176,7 +196,8 @@ ${MEMBER_TITLE}｜专属报价计算器 ${VERSION}
 运费单价：$${money(r.rate)}/lb
 国际运费：$${money(freight)}
 商品价值：$${money(value)}
-操作费/打包费：$${money(op)}
+操作费/打包费：$${money(op)}${specialFee>0?`
+特殊地区派送费：$${money(specialFee)}`:''}
 固定利润（USD 美元）：$${money(profitUsd)}
 固定利润（RMB 人民币）：¥${money(profitRmb)}
 美元兑人民币汇率：${money(fx)}
