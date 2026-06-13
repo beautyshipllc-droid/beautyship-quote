@@ -1,31 +1,205 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beauty Ship Express 会员专属报价系统</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}body{background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;color:#111}.container{background:#fff;max-width:650px;width:100%;border-radius:20px;padding:40px 30px;box-shadow:0 10px 30px rgba(0,0,0,.08);text-align:center}.logo{font-size:32px;font-weight:800;color:#d60000;margin-bottom:10px}.subtitle{font-size:24px;font-weight:800;color:#222;margin-bottom:25px}.line{height:1px;background:#eee;margin:25px 0}.desc{color:#555;font-size:16px;line-height:1.8}.feature{text-align:left;display:inline-block;margin-top:18px;line-height:2;font-size:17px;color:#333}.member{margin-top:15px;color:#555;line-height:1.8}.contact{margin-top:20px;font-size:18px;line-height:2;font-weight:700;color:#111}.footer{margin-top:25px;color:#999;font-size:14px}@media(max-width:600px){.container{padding:34px 22px}.logo{font-size:28px}.subtitle{font-size:22px}.feature{font-size:16px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beauty Ship Express 会员专属报价系统</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #f5f7fb 0%, #eef2f7 100%);
+      color: #222;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 48px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 720px;
+      background: #fff;
+      border-radius: 28px;
+      padding: 42px 26px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    .brand {
+      font-size: 34px;
+      font-weight: 900;
+      color: #d8322a;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .subtitle {
+      font-size: 22px;
+      font-weight: 700;
+      color: #555;
+      margin-bottom: 34px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e8e8e8;
+      margin: 28px 0;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #555;
+      margin-bottom: 22px;
+    }
+
+    .features {
+      display: inline-block;
+      text-align: left;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 2;
+      color: #333;
+    }
+
+    .desc {
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.8;
+      color: #666;
+      margin-top: 28px;
+    }
+
+    .highlight {
+      margin-top: 22px;
+      font-size: 21px;
+      font-weight: 800;
+      color: #1d4ed8;
+      line-height: 1.7;
+    }
+
+    .notice {
+      font-size: 22px;
+      font-weight: 800;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 26px;
+    }
+
+    .contact {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: 20px;
+      font-weight: 800;
+      color: #aaa;
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 36px 14px;
+      }
+
+      .card {
+        border-radius: 24px;
+        padding: 36px 20px;
+      }
+
+      .brand {
+        font-size: 28px;
+      }
+
+      .title {
+        font-size: 25px;
+      }
+
+      .subtitle,
+      .features,
+      .desc,
+      .highlight,
+      .notice {
+        font-size: 18px;
+      }
+
+      .section-title {
+        font-size: 19px;
+      }
+
+      .contact {
+        font-size: 21px;
+      }
+
+      .footer {
+        font-size: 17px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
-  <div class="logo">Beauty Ship Express</div>
-  <div class="subtitle">会员专属报价系统</div>
-  <div class="desc">美国 → 中国空运专线</div>
-  <div class="line"></div>
-  <div class="desc">🎯 会员专属工具</div>
-  <div class="feature">
-    📦 国际运费报价计算<br>
-    💰 海淘代购报价计算<br>
-    📋 客户报价单快速生成<br>
-    📱 支持手机与电脑使用
-  </div>
-  <div class="member">根据发货频率与月发货量，<br>我们为会员客户提供专属运价方案与报价系统。</div>
-  <div class="line"></div>
-  <div class="desc">当前页面仅为系统入口。<br>请联系客户经理获取您的专属报价链接。</div>
-  <div class="contact">📱 微信：Beautyshipllc<br>📞 916-718-9551</div>
-  <div class="footer">北加州实体门店 · 美国直发中国</div>
-</div>
+  <main class="page">
+    <section class="card">
+      <div class="brand">Beauty Ship Express</div>
+      <div class="title">会员专属报价系统</div>
+      <div class="subtitle">美国 → 中国空运专线</div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">🎯 欢迎使用在线报价工具</div>
+
+      <div class="features">
+        📦 国际运费快速计算<br />
+        💰 海淘代购报价计算<br />
+        📋 客户报价单快速生成<br />
+        📱 支持手机与电脑使用<br />
+        👑 普通会员 / VIP1 / VIP2 / VIP3
+      </div>
+
+      <div class="desc">
+        根据会员等级自动匹配对应报价，<br />
+        帮助您快速完成运费查询与客户报价。
+      </div>
+
+      <div class="highlight">
+        自己查运费、给客户报价，<br />
+        一个工具即可完成。
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="notice">
+        请联系客户经理<br />
+        获取您的专属报价链接
+      </div>
+
+      <div class="contact">
+        📱 微信：Beautyshipllc<br />
+        ☎️ 916-718-9551
+      </div>
+
+      <div class="footer">
+        北加州实体门店 · 美国直发中国
+      </div>
+    </section>
+  </main>
 </body>
 </html>
