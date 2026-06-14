@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Beauty Ship Express VIP1 平台会员 专属报价计算器 V7.6.6</title>
+<title>Beauty Ship Express VIP1 平台会员 专属报价计算器 V7.6.7</title>
 <style>
 :root{--blue:#0969da;--dark:#0f1b2d;--muted:#667085;--line:#d9e2ef;--bg:#f3f7ff;--card:#fff;--soft:#eef5ff;--danger:#d21f52;}
 *{box-sizing:border-box}
@@ -84,13 +84,13 @@ details.more .more-body{padding:14px}
 .packing-line:last-child{margin-bottom:0}
 .packing-line .packing-title{margin-bottom:5px;color:#0969da}
 
-/* V7.6.6 result cards: unified title → content structure */
+/* V7.6.7 result cards: unified title → content structure */
 .total-card{min-height:96px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
 .copy-total-card{min-height:96px;background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;border-radius:18px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;line-height:1.15;box-shadow:0 6px 14px rgba(9,105,218,.08);white-space:normal;gap:7px}
 .copy-total-label{color:#667085;margin:0;font-size:13px;font-weight:800;line-height:1.25;text-align:center}
 .copy-total-action{font-size:32px;font-weight:1000;color:#DC2626;line-height:1;white-space:nowrap}
 .copy-total-icon,.copy-total-text{display:none}
-/* V7.6.6 top packing entry: single-layer card, no pill-in-pill */
+/* V7.6.7 top packing entry: single-layer card, no pill-in-pill */
 .header-packing{min-width:220px;max-width:360px;margin-top:4px;border:1px solid #BFDBFE;background:#F8FBFF;border-radius:18px;overflow:hidden;box-shadow:0 6px 14px rgba(9,105,218,.06)}
 .header-packing summary{border:0!important;border-radius:0!important;background:#F8FBFF!important;box-shadow:none!important;padding:14px 16px!important;text-align:center;line-height:1.35;color:#2563EB;font-weight:900}
 .header-packing[open] summary{border-radius:0!important;border-bottom:1px solid #BFDBFE!important}
@@ -133,7 +133,7 @@ details.more .more-body{padding:14px}
 @media(max-width:768px){.field-hint{font-size:12px;margin-top:7px}}
 @media(max-width:360px){.card{padding:18px 12px}label{font-size:13px}select,input{font-size:15px;padding:0 8px}.field-card{padding:9px}.total-rmb{font-size:25px}.total-usd{font-size:20px}}
 
-/* V7.6.6 copy success toast - safe */
+/* V7.6.7 copy success toast - safe */
 .copy-toast{
   position:fixed;
   left:50%;
@@ -159,7 +159,7 @@ details.more .more-body{padding:14px}
 }
 
 
-/* V7.6.6 safety reminders */
+/* V7.6.7 safety reminders */
 .weight-alert{
   display:none;
   margin-top:8px;
@@ -185,7 +185,7 @@ details.more .more-body{padding:14px}
 }
 
 
-/* V7.6.6 value and rule emphasis */
+/* V7.6.7 value and rule emphasis */
 .value-alert{
   display:none;
   margin-top:8px;
@@ -205,14 +205,14 @@ details.more .more-body{padding:14px}
 }
 
 
-/* V7.6.6 clear current ticket */
+/* V7.6.7 clear current ticket */
 .clear-ticket-wrap{grid-column:1/-1;display:flex;justify-content:center;margin:2px 0 2px}
 .clear-ticket-btn{height:42px;padding:0 18px;border-radius:999px;border:1px solid #CBD5E1;background:#F8FAFC;color:#475569;font-size:14px;font-weight:900;box-shadow:0 4px 12px rgba(15,55,110,.05)}
 .clear-ticket-btn:active{transform:scale(.98)}
 @media(max-width:768px){.clear-ticket-btn{height:38px;font-size:13px;padding:0 16px}.clear-ticket-wrap{margin:0}}
 
 
-/* V7.6.6 result area: 2 rows, 3:1 money/action layout */
+/* V7.6.7 result area: 2 rows, 3:1 money/action layout */
 .result-pair{
   display:flex;
   flex-direction:column;
@@ -273,7 +273,7 @@ details.more .more-body{padding:14px}
 }
 
 
-/* V7.6.6 result area compact adjustment */
+/* V7.6.7 result area compact adjustment */
 .result-pair{
   gap:8px !important;
   margin-bottom:14px !important;
@@ -321,14 +321,14 @@ details.more .more-body{padding:14px}
 }
 
 
-/* V7.6.6: move all route packing rules below full quote copy button */
+/* V7.6.7: move all route packing rules below full quote copy button */
 .below-copy-packing{
   margin-top:12px !important;
   margin-bottom:12px !important;
 }
 
 
-/* V7.6.6: label text adjustment */
+/* V7.6.7: label text adjustment */
 .label-stack{
   display:block;
   line-height:1.18;
@@ -349,6 +349,48 @@ details.more .more-body{padding:14px}
   }
 }
 
+
+/* V7.6.7: all route packing rules always visible, no capsule */
+.all-rules-section{
+  margin-top:12px;
+  margin-bottom:12px;
+  background:#fff;
+  border:1px solid #dbe7f7;
+  border-radius:18px;
+  padding:14px 12px 12px;
+  box-shadow:0 8px 22px rgba(15,55,110,.06);
+}
+.all-rules-title{
+  margin:0 0 12px;
+  text-align:center;
+  font-size:18px;
+  line-height:1.25;
+  font-weight:1000;
+  color:#0f172a;
+}
+.all-rules-section .packing-all-body{
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+.all-rules-section .packing-line{
+  background:#fbfdff;
+}
+@media(max-width:768px){
+  .all-rules-section{
+    padding:13px 10px 11px;
+    border-radius:16px;
+  }
+  .all-rules-title{
+    font-size:17px;
+    margin-bottom:10px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -356,7 +398,7 @@ details.more .more-body{padding:14px}
 <div class="top-head">
   <div class="title-block">
     <h1>Beauty Ship Express 美邮购</h1>
-    <div class="sub"><span class="member-level">VIP1 平台会员</span><span class="calc-version">｜专属报价计算器 V7.6.6</span></div>
+    <div class="sub"><span class="member-level">VIP1 平台会员</span><span class="calc-version">｜专属报价计算器 V7.6.7</span></div>
   </div>
 </div><hr>
 
@@ -448,16 +490,16 @@ details.more .more-body{padding:14px}
 </div>
 <button class="copy-dark" onclick="copyWechat()">📋 复制完整报价单</button>
 
-<details class="packing-all header-packing below-copy-packing" id="allPackingWrap">
-  <summary id="allPackingSummary"><span class="mainline">▶ 📚 各线路装箱要求</span><span class="subline">点击展开</span></summary>
+<section class="all-rules-section" id="allPackingSection">
+  <h3 class="all-rules-title">📚 各线路包裹装箱要求说明</h3>
   <div class="packing-all-body" id="allPackingBox"></div>
-</details>
+</section>
 
 <div class="notice">计费规则：A/B/C/C1/D/E/H 为实际计重，1.0磅起计费；超过1.0磅按实重收费。0.1磅为最小计费单位，不足0.1磅按0.1磅进位计算。W线为跳磅进位整取，2磅起计费；U线为跳磅进位整取，30磅起计费。特别说明：美元金额显示真实运费总价，包含国际运费、操作费/打包费、特殊地区派送费和身份证照片附加服务费，不包含商品价值、固定利润（USD）和固定利润（RMB）；最终客户报价请以人民币总价为准。美元兑人民币汇率会自动记住；每次刷新页面后，重量、商品价值、固定利润和操作费会自动归零。</div>
 </div></div>
 <script>
 const MEMBER_TITLE="VIP1 平台会员";
-const VERSION='V7.6.6';
+const VERSION='V7.6.7';
 const ROUTES=[{"code":"A","name":"普货/保健品/日用品/奶粉","rate":6.2,"minWeight":0},{"code":"B","name":"服装类","rate":6.2,"minWeight":0},{"code":"C","name":"二线护肤品/鞋服/饰品","rate":8.2,"minWeight":0},{"code":"C1","name":"二线箱包","rate":10.8,"minWeight":0},{"code":"E","name":"普通鞋类","rate":6.5,"minWeight":0},{"code":"D","name":"液体水奶","rate":5.8,"minWeight":0},{"code":"W","name":"普通手表","rate":10.0,"minWeight":2},{"code":"H","name":"小家电/胃药","rate":9.2,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
 
 const PACKING_RULES={
@@ -521,7 +563,7 @@ function init(){
     Object.keys(defaults).forEach(id=>localStorage.setItem(location.pathname+'_'+id,defaults[id]));
     localStorage.setItem(resetKey,VERSION);
   }
-  // V7.6.6：每次刷新页面，单票报价相关字段自动归零；汇率保留上次设置
+  // V7.6.7：每次刷新页面，单票报价相关字段自动归零；汇率保留上次设置
   ['weight','value','profitUsd','profitRmb','opFee'].forEach(id=>{
     const el=$(id);
     if(!el) return;
@@ -557,12 +599,10 @@ function init(){
 
   if($('route')) $('route').addEventListener('change',()=>{updatePackingRules();});
   if($('currentPackingWrap')) $('currentPackingWrap').addEventListener('toggle',()=>{localStorage.setItem(location.pathname+'_currentPackingOpen',$('currentPackingWrap').open?'1':'0'); updateCurrentPackingSummary();});
-  if($('allPackingWrap')) $('allPackingWrap').addEventListener('toggle',updateAllPackingSummary);
   const moreWrap=document.querySelector('details.more');
   if(moreWrap) moreWrap.addEventListener('toggle',updateMoreSummary);
   if($('currentPackingWrap')){$('currentPackingWrap').open=false;}
   updateMoreSummary();
-  updateAllPackingSummary();
 }
 
 
@@ -686,12 +726,11 @@ function copyTotal(){if(!lastTotal){if(!calc())return;} cp(lastTotal,'✓ 已复
 function copyWechat(){if(!lastText){if(!calc())return;} cp(lastText,'✓ 已复制完整报价单')}
 init();
 initAllPackingRules();
-updateAllPackingSummary();
 updatePackingRules();
 calc(true);
 
 
-// V7.6.6 copy success toast - safe
+// V7.6.7 copy success toast - safe
 let copyToastTimer = null;
 function showCopyToast(message){
   let toast = document.getElementById('copyToast');

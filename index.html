@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;color:#111}.container{background:#fff;max-width:650px;width:100%;border-radius:20px;padding:40px 30px;box-shadow:0 10px 30px rgba(0,0,0,.08);text-align:center}.logo{font-size:32px;font-weight:800;color:#d60000;margin-bottom:10px}.subtitle{font-size:24px;font-weight:800;color:#222;margin-bottom:25px}.line{height:1px;background:#eee;margin:25px 0}.desc{color:#555;font-size:16px;line-height:1.8}.feature{text-align:left;display:inline-block;margin-top:18px;line-height:2;font-size:17px;color:#333}.member{margin-top:15px;color:#555;line-height:1.8}.contact{margin-top:20px;font-size:18px;line-height:2;font-weight:700;color:#111}.footer{margin-top:25px;color:#999;font-size:14px}@media(max-width:600px){.container{padding:34px 22px}.logo{font-size:28px}.subtitle{font-size:22px}.feature{font-size:16px}}
 
-/* V7.6.6 copy success toast - safe */
+/* V7.6.7 copy success toast - safe */
 .copy-toast{
   position:fixed;
   left:50%;
@@ -33,7 +33,7 @@
 }
 
 
-/* V7.6.6 safety reminders */
+/* V7.6.7 safety reminders */
 .weight-alert{
   display:none;
   margin-top:8px;
@@ -59,7 +59,7 @@
 }
 
 
-/* V7.6.6 value and rule emphasis */
+/* V7.6.7 value and rule emphasis */
 .value-alert{
   display:none;
   margin-top:8px;
@@ -79,14 +79,14 @@
 }
 
 
-/* V7.6.6 clear current ticket */
+/* V7.6.7 clear current ticket */
 .clear-ticket-wrap{grid-column:1/-1;display:flex;justify-content:center;margin:2px 0 2px}
 .clear-ticket-btn{height:42px;padding:0 18px;border-radius:999px;border:1px solid #CBD5E1;background:#F8FAFC;color:#475569;font-size:14px;font-weight:900;box-shadow:0 4px 12px rgba(15,55,110,.05)}
 .clear-ticket-btn:active{transform:scale(.98)}
 @media(max-width:768px){.clear-ticket-btn{height:38px;font-size:13px;padding:0 16px}.clear-ticket-wrap{margin:0}}
 
 
-/* V7.6.6 result area: 2 rows, 3:1 money/action layout */
+/* V7.6.7 result area: 2 rows, 3:1 money/action layout */
 .result-pair{
   display:flex;
   flex-direction:column;
@@ -147,7 +147,7 @@
 }
 
 
-/* V7.6.6 result area compact adjustment */
+/* V7.6.7 result area compact adjustment */
 .result-pair{
   gap:8px !important;
   margin-bottom:14px !important;
@@ -195,7 +195,7 @@
 }
 
 
-/* V7.6.6: label text adjustment */
+/* V7.6.7: label text adjustment */
 .label-stack{
   display:block;
   line-height:1.18;
@@ -213,6 +213,48 @@
 @media(max-width:768px){
   .label-stack .label-sub{
     font-size:13px;
+  }
+}
+
+
+/* V7.6.7: all route packing rules always visible, no capsule */
+.all-rules-section{
+  margin-top:12px;
+  margin-bottom:12px;
+  background:#fff;
+  border:1px solid #dbe7f7;
+  border-radius:18px;
+  padding:14px 12px 12px;
+  box-shadow:0 8px 22px rgba(15,55,110,.06);
+}
+.all-rules-title{
+  margin:0 0 12px;
+  text-align:center;
+  font-size:18px;
+  line-height:1.25;
+  font-weight:1000;
+  color:#0f172a;
+}
+.all-rules-section .packing-all-body{
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+.all-rules-section .packing-line{
+  background:#fbfdff;
+}
+@media(max-width:768px){
+  .all-rules-section{
+    padding:13px 10px 11px;
+    border-radius:16px;
+  }
+  .all-rules-title{
+    font-size:17px;
+    margin-bottom:10px;
   }
 }
 
