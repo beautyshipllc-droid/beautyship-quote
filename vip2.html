@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Beauty Ship Express VIP2 代购会员 专属报价计算器 V7.3</title>
+<title>Beauty Ship Express VIP2 代购会员 专属报价计算器 V7.5</title>
 <style>
 :root{--blue:#0969da;--dark:#0f1b2d;--muted:#667085;--line:#d9e2ef;--bg:#f3f7ff;--card:#fff;--soft:#eef5ff;--danger:#d21f52;}
 *{box-sizing:border-box}
@@ -84,13 +84,13 @@ details.more .more-body{padding:14px}
 .packing-line:last-child{margin-bottom:0}
 .packing-line .packing-title{margin-bottom:5px;color:#0969da}
 
-/* V7.3 result cards: unified title → content structure */
+/* V7.5 result cards: unified title → content structure */
 .total-card{min-height:96px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
 .copy-total-card{min-height:96px;background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;border-radius:18px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;line-height:1.15;box-shadow:0 6px 14px rgba(9,105,218,.08);white-space:normal;gap:7px}
 .copy-total-label{color:#667085;margin:0;font-size:13px;font-weight:800;line-height:1.25;text-align:center}
 .copy-total-action{font-size:32px;font-weight:1000;color:#DC2626;line-height:1;white-space:nowrap}
 .copy-total-icon,.copy-total-text{display:none}
-/* V7.3 top packing entry: single-layer card, no pill-in-pill */
+/* V7.5 top packing entry: single-layer card, no pill-in-pill */
 .header-packing{min-width:220px;max-width:360px;margin-top:4px;border:1px solid #BFDBFE;background:#F8FBFF;border-radius:18px;overflow:hidden;box-shadow:0 6px 14px rgba(9,105,218,.06)}
 .header-packing summary{border:0!important;border-radius:0!important;background:#F8FBFF!important;box-shadow:none!important;padding:14px 16px!important;text-align:center;line-height:1.35;color:#2563EB;font-weight:900}
 .header-packing[open] summary{border-radius:0!important;border-bottom:1px solid #BFDBFE!important}
@@ -133,7 +133,7 @@ details.more .more-body{padding:14px}
 @media(max-width:768px){.field-hint{font-size:12px;margin-top:7px}}
 @media(max-width:360px){.card{padding:18px 12px}label{font-size:13px}select,input{font-size:15px;padding:0 8px}.field-card{padding:9px}.total-rmb{font-size:25px}.total-usd{font-size:20px}}
 
-/* V7.3 copy success toast - safe */
+/* V7.5 copy success toast - safe */
 .copy-toast{
   position:fixed;
   left:50%;
@@ -158,6 +158,32 @@ details.more .more-body{padding:14px}
   transform:translateX(-50%) translateY(0);
 }
 
+
+/* V7.5 safety reminders */
+.weight-alert{
+  display:none;
+  margin-top:8px;
+  padding:9px 10px;
+  border-radius:12px;
+  background:#FFF7ED;
+  border:1px solid #FDBA74;
+  color:#C2410C;
+  font-size:12px;
+  font-weight:800;
+  line-height:1.45;
+}
+.quote-disclaimer{
+  margin-top:14px;
+  padding:11px 12px;
+  border-radius:14px;
+  background:#FFF7ED;
+  border:1px solid #FDBA74;
+  color:#C2410C;
+  font-size:13px;
+  font-weight:850;
+  line-height:1.5;
+}
+
 </style>
 </head>
 <body>
@@ -165,7 +191,7 @@ details.more .more-body{padding:14px}
 <div class="top-head">
   <div class="title-block">
     <h1>Beauty Ship Express 美邮购</h1>
-    <div class="sub"><span class="member-level">VIP2 代购会员</span><span class="calc-version">｜专属报价计算器 V7.3</span></div>
+    <div class="sub"><span class="member-level">VIP2 代购会员</span><span class="calc-version">｜专属报价计算器 V7.5</span></div>
   </div>
   <details class="packing-all header-packing" id="allPackingWrap">
     <summary id="allPackingSummary"><span class="mainline">▶ 📚 各线路装箱要求</span><span class="subline">点击展开</span></summary>
@@ -199,6 +225,7 @@ details.more .more-body{padding:14px}
   <div class="field-card">
     <label>重量（LB 磅）</label>
     <input id="weight" inputmode="decimal" value="" placeholder="0">
+    <div id="weightRuleAlert" class="weight-alert"></div>
   </div>
 
   <div class="field-card full">
@@ -249,13 +276,14 @@ details.more .more-body{padding:14px}
     <div class="total-card"><div class="total-label">运费总价</div><div class="total-usd" id="usdTotal">$0.0</div></div>
   </div>
   <div class="detail-table" id="detailTable"></div>
+  <div class="quote-disclaimer">⚠️ 价格仅供参考，实际费用以入库复核为准。</div>
 </div>
 <button class="copy-dark" onclick="copyWechat()">📋 复制完整报价单</button>
 <div class="notice">计费规则：A/B/C/C1/D/E/H 为实际计重，1.0磅起计费；超过1.0磅按实重收费。0.1磅为最小计费单位，不足0.1磅按0.1磅进位计算。W线为跳磅进位整取，2磅起计费；U线为跳磅进位整取，30磅起计费。特别说明：美元金额显示真实运费总价，包含国际运费、操作费/打包费、特殊地区派送费和身份证照片附加服务费，不包含商品价值、固定利润（USD）和固定利润（RMB）；最终客户报价请以人民币总价为准。美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
 </div></div>
 <script>
 const MEMBER_TITLE="VIP2 代购会员";
-const VERSION='V7.3';
+const VERSION='V7.5';
 const ROUTES=[{"code":"A","name":"普货/保健品/日用品/奶粉","rate":5.5,"minWeight":0},{"code":"B","name":"服装类","rate":5.5,"minWeight":0},{"code":"C","name":"二线护肤品/鞋服/饰品","rate":7.5,"minWeight":0},{"code":"C1","name":"二线箱包","rate":10.5,"minWeight":0},{"code":"E","name":"普通鞋类","rate":6.0,"minWeight":0},{"code":"D","name":"液体水奶","rate":5.5,"minWeight":0},{"code":"W","name":"普通手表","rate":10.0,"minWeight":2},{"code":"H","name":"小家电/胃药","rate":9.0,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
 
 const PACKING_RULES={
@@ -369,9 +397,34 @@ function billingWeight(w, r){
   if(minW>0) return Math.max(Math.ceil(w), minW);
   return Math.max(Math.ceil(w*10)/10, 1);
 }
+
+function updateWeightRuleAlert(r,w,bill){
+  const box=$('weightRuleAlert');
+  if(!box || !r){return;}
+  if(!w || w<=0){
+    box.style.display='none';
+    box.innerText='';
+    return;
+  }
+  let msg='';
+  const minW=r.minWeight||0;
+  if(minW>0 && w<minW){
+    msg=`⚠️ ${r.code}线 ${minW} lb 起计费，当前重量已按 ${minW} lb 计费。`;
+  }else if(minW===0 && w<1){
+    msg='⚠️ 当前线路 1.0 lb 起计费，当前重量已按 1.0 lb 计费。';
+  }
+  if(msg){
+    box.innerText=msg;
+    box.style.display='block';
+  }else{
+    box.style.display='none';
+    box.innerText='';
+  }
+}
+
 function calc(silent=false){
   const r=ROUTES[parseInt($('route').value||0)]; updatePackingRules(); const w=num('weight');
-  const minW=r.minWeight||0; const bill=billingWeight(w,r); const value=w>0?num('value'):0, profitUsd=w>0?num('profitUsd'):0, profitRmb=w>0?num('profitRmb'):0, fx=num('fx')||6.8, op=w>0?num('opFee'):0;
+  const minW=r.minWeight||0; const bill=billingWeight(w,r); updateWeightRuleAlert(r,w,bill); const value=w>0?num('value'):0, profitUsd=w>0?num('profitUsd'):0, profitRmb=w>0?num('profitRmb'):0, fx=num('fx')||6.8, op=w>0?num('opFee'):0;
   const specialFee=(w>0 && $('specialAreaFee') && $('specialAreaFee').checked)?3:0;
   const idPhotoServiceFee=(w>0 && $('idPhotoFee') && $('idPhotoFee').checked)?0.3:0;
   const freight=bill*r.rate; const usdCost=freight+op+specialFee+idPhotoServiceFee; const rmbTotal=(value+freight+op+specialFee+idPhotoServiceFee+profitUsd)*fx+profitRmb;
@@ -411,7 +464,7 @@ updatePackingRules();
 calc(true);
 
 
-// V7.3 copy success toast - safe
+// V7.5 copy success toast - safe
 let copyToastTimer = null;
 function showCopyToast(message){
   let toast = document.getElementById('copyToast');

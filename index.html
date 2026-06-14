@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;color:#111}.container{background:#fff;max-width:650px;width:100%;border-radius:20px;padding:40px 30px;box-shadow:0 10px 30px rgba(0,0,0,.08);text-align:center}.logo{font-size:32px;font-weight:800;color:#d60000;margin-bottom:10px}.subtitle{font-size:24px;font-weight:800;color:#222;margin-bottom:25px}.line{height:1px;background:#eee;margin:25px 0}.desc{color:#555;font-size:16px;line-height:1.8}.feature{text-align:left;display:inline-block;margin-top:18px;line-height:2;font-size:17px;color:#333}.member{margin-top:15px;color:#555;line-height:1.8}.contact{margin-top:20px;font-size:18px;line-height:2;font-weight:700;color:#111}.footer{margin-top:25px;color:#999;font-size:14px}@media(max-width:600px){.container{padding:34px 22px}.logo{font-size:28px}.subtitle{font-size:22px}.feature{font-size:16px}}
 
-/* V7.3 copy success toast - safe */
+/* V7.5 copy success toast - safe */
 .copy-toast{
   position:fixed;
   left:50%;
@@ -30,6 +30,32 @@
 .copy-toast.show{
   opacity:1;
   transform:translateX(-50%) translateY(0);
+}
+
+
+/* V7.5 safety reminders */
+.weight-alert{
+  display:none;
+  margin-top:8px;
+  padding:9px 10px;
+  border-radius:12px;
+  background:#FFF7ED;
+  border:1px solid #FDBA74;
+  color:#C2410C;
+  font-size:12px;
+  font-weight:800;
+  line-height:1.45;
+}
+.quote-disclaimer{
+  margin-top:14px;
+  padding:11px 12px;
+  border-radius:14px;
+  background:#FFF7ED;
+  border:1px solid #FDBA74;
+  color:#C2410C;
+  font-size:13px;
+  font-weight:850;
+  line-height:1.5;
 }
 
 </style>
