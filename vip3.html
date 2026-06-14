@@ -401,9 +401,9 @@ ${MEMBER_TITLE}｜专属报价计算器 ${VERSION}
 人民币总价：¥${money(rmbTotal)}`;
   return true;
 }
-async function cp(t){try{await navigator.clipboard.writeText(t);alert('已复制')}catch(e){prompt('请手动复制',t)}}
-function copyTotal(){if(!lastTotal){if(!calc())return;} cp(lastTotal)}
-function copyWechat(){if(!lastText){if(!calc())return;} cp(lastText)}
+async function cp(t,msg){try{await navigator.clipboard.writeText(t);showCopyToast(msg||'✓ 已复制报价')}catch(e){prompt('请手动复制',t)}}
+function copyTotal(){if(!lastTotal){if(!calc())return;} cp(lastTotal,'✓ 已复制报价')}
+function copyWechat(){if(!lastText){if(!calc())return;} cp(lastText,'✓ 已复制完整报价单')}
 init();
 initAllPackingRules();
 updateAllPackingSummary();
