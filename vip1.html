@@ -133,12 +133,12 @@ details.more .more-body{padding:14px}
 @media(max-width:768px){.field-hint{font-size:12px;margin-top:7px}}
 @media(max-width:360px){.card{padding:18px 12px}label{font-size:13px}select,input{font-size:15px;padding:0 8px}.field-card{padding:9px}.total-rmb{font-size:25px}.total-usd{font-size:20px}}
 
-/* V7.3 copy success toast */
+/* V7.3 copy success toast - safe */
 .copy-toast{
   position:fixed;
   left:50%;
   bottom:28px;
-  transform:translateX(-50%) translateY(12px);
+  transform:translateX(-50%) translateY(10px);
   background:rgba(15,23,42,.92);
   color:#fff;
   padding:10px 16px;
@@ -402,7 +402,6 @@ ${MEMBER_TITLE}｜专属报价计算器 ${VERSION}
   return true;
 }
 async function cp(t){try{await navigator.clipboard.writeText(t);alert('已复制')}catch(e){prompt('请手动复制',t)}}
-showCopyToast('✓ 已复制完整报价单');
 function copyTotal(){if(!lastTotal){if(!calc())return;} cp(lastTotal)}
 function copyWechat(){if(!lastText){if(!calc())return;} cp(lastText)}
 init();
@@ -411,22 +410,23 @@ updateAllPackingSummary();
 updatePackingRules();
 calc(true);
 
-// V7.3 copy success toast
-let copyToastTimer=null;
+
+// V7.3 copy success toast - safe
+let copyToastTimer = null;
 function showCopyToast(message){
-  let toast=document.getElementById('copyToast');
+  let toast = document.getElementById('copyToast');
   if(!toast){
-    toast=document.createElement('div');
-    toast.id='copyToast';
-    toast.className='copy-toast';
+    toast = document.createElement('div');
+    toast.id = 'copyToast';
+    toast.className = 'copy-toast';
     document.body.appendChild(toast);
   }
-  toast.textContent=message || '✓ 已复制报价';
+  toast.textContent = message || '✓ 已复制报价';
   toast.classList.add('show');
   if(copyToastTimer) clearTimeout(copyToastTimer);
-  copyToastTimer=setTimeout(function(){
+  copyToastTimer = setTimeout(function(){
     toast.classList.remove('show');
-  },1000);
+  }, 1000);
 }
 
 </script>
