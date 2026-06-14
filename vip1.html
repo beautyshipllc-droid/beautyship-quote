@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Beauty Ship Express VIP1 平台会员 专属报价计算器 V7.1</title>
+<title>Beauty Ship Express VIP1 平台会员 专属报价计算器 V7.2</title>
 <style>
 :root{--blue:#0969da;--dark:#0f1b2d;--muted:#667085;--line:#d9e2ef;--bg:#f3f7ff;--card:#fff;--soft:#eef5ff;--danger:#d21f52;}
 *{box-sizing:border-box}
@@ -58,8 +58,8 @@ details.more .more-body{padding:14px}
 .copy-total-icon{font-size:24px;line-height:1}
 .copy-total-text{font-size:17px;font-weight:1000;line-height:1.1}
 .total-label{font-size:13px;color:#667085;font-weight:800;margin-bottom:6px;line-height:1.25}
-.total-rmb{font-size:36px;font-weight:1000;color:#d21f52;line-height:1}
-.total-usd{font-size:30px;font-weight:1000;color:#0969da;line-height:1}
+.total-rmb{font-size:32px;font-weight:1000;color:#d21f52;line-height:1}
+.total-usd{font-size:32px;font-weight:1000;color:#0969da;line-height:1}
 .detail-table{border-top:1px solid #dbe7f7;margin-top:6px}
 .row{display:grid;grid-template-columns:1fr auto;gap:14px;border-bottom:1px solid #dbe7f7;padding:12px 0;font-size:17px}
 .row .k{color:#667085;font-weight:750}
@@ -84,13 +84,13 @@ details.more .more-body{padding:14px}
 .packing-line:last-child{margin-bottom:0}
 .packing-line .packing-title{margin-bottom:5px;color:#0969da}
 
-/* V7.1 result cards: unified title → content structure */
+/* V7.2 result cards: unified title → content structure */
 .total-card{min-height:96px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
 .copy-total-card{min-height:96px;background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;border-radius:18px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;line-height:1.15;box-shadow:0 6px 14px rgba(9,105,218,.08);white-space:normal;gap:7px}
 .copy-total-label{color:#667085;margin:0;font-size:13px;font-weight:800;line-height:1.25;text-align:center}
-.copy-total-action{font-size:30px;font-weight:1000;color:#DC2626;line-height:1;white-space:nowrap}
+.copy-total-action{font-size:32px;font-weight:1000;color:#DC2626;line-height:1;white-space:nowrap}
 .copy-total-icon,.copy-total-text{display:none}
-/* V7.1 top packing entry: single-layer card, no pill-in-pill */
+/* V7.2 top packing entry: single-layer card, no pill-in-pill */
 .header-packing{min-width:220px;max-width:360px;margin-top:4px;border:1px solid #BFDBFE;background:#F8FBFF;border-radius:18px;overflow:hidden;box-shadow:0 6px 14px rgba(9,105,218,.06)}
 .header-packing summary{border:0!important;border-radius:0!important;background:#F8FBFF!important;box-shadow:none!important;padding:14px 16px!important;text-align:center;line-height:1.35;color:#2563EB;font-weight:900}
 .header-packing[open] summary{border-radius:0!important;border-bottom:1px solid #BFDBFE!important}
@@ -139,7 +139,7 @@ details.more .more-body{padding:14px}
 <div class="top-head">
   <div class="title-block">
     <h1>Beauty Ship Express 美邮购</h1>
-    <div class="sub"><span class="member-level">VIP1 平台会员</span><span class="calc-version">｜专属报价计算器 V7.1</span></div>
+    <div class="sub"><span class="member-level">VIP1 平台会员</span><span class="calc-version">｜专属报价计算器 V7.2</span></div>
   </div>
   <details class="packing-all header-packing" id="allPackingWrap">
     <summary id="allPackingSummary"><span class="mainline">▶ 📚 各线路装箱要求</span><span class="subline">点击展开</span></summary>
@@ -219,7 +219,7 @@ details.more .more-body{padding:14px}
 <div class="result" id="result">
   <div class="total-grid">
     <div class="total-card"><div class="total-label">人民币总价</div><div class="total-rmb" id="rmbTotal">¥0.0</div></div>
-    <div class="copy-total-card" onclick="copyTotal()"><div class="total-label copy-total-label">复制报价</div><div class="copy-total-action">📋复制</div></div>
+    <div class="copy-total-card" onclick="copyTotal()"><div class="total-label copy-total-label">复制报价</div><div class="copy-total-action">复制</div></div>
     <div class="total-card"><div class="total-label">运费总价</div><div class="total-usd" id="usdTotal">$0.0</div></div>
   </div>
   <div class="detail-table" id="detailTable"></div>
@@ -229,7 +229,7 @@ details.more .more-body{padding:14px}
 </div></div>
 <script>
 const MEMBER_TITLE="VIP1 平台会员";
-const VERSION='V7.1';
+const VERSION='V7.2';
 const ROUTES=[{"code":"A","name":"普货/保健品/日用品/奶粉","rate":6.2,"minWeight":0},{"code":"B","name":"服装类","rate":6.2,"minWeight":0},{"code":"C","name":"二线护肤品/鞋服/饰品","rate":8.2,"minWeight":0},{"code":"C1","name":"二线箱包","rate":10.8,"minWeight":0},{"code":"E","name":"普通鞋类","rate":6.5,"minWeight":0},{"code":"D","name":"液体水奶","rate":5.8,"minWeight":0},{"code":"W","name":"普通手表","rate":10.0,"minWeight":2},{"code":"H","name":"小家电/胃药","rate":9.2,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
 
 const PACKING_RULES={
