@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Beauty Ship Express VIP3 电商会员 专属报价计算器 V7.2</title>
+<title>Beauty Ship Express VIP3 电商会员 专属报价计算器 V7.3</title>
 <style>
 :root{--blue:#0969da;--dark:#0f1b2d;--muted:#667085;--line:#d9e2ef;--bg:#f3f7ff;--card:#fff;--soft:#eef5ff;--danger:#d21f52;}
 *{box-sizing:border-box}
@@ -84,13 +84,13 @@ details.more .more-body{padding:14px}
 .packing-line:last-child{margin-bottom:0}
 .packing-line .packing-title{margin-bottom:5px;color:#0969da}
 
-/* V7.2 result cards: unified title → content structure */
+/* V7.3 result cards: unified title → content structure */
 .total-card{min-height:96px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
 .copy-total-card{min-height:96px;background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;border-radius:18px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;line-height:1.15;box-shadow:0 6px 14px rgba(9,105,218,.08);white-space:normal;gap:7px}
 .copy-total-label{color:#667085;margin:0;font-size:13px;font-weight:800;line-height:1.25;text-align:center}
 .copy-total-action{font-size:32px;font-weight:1000;color:#DC2626;line-height:1;white-space:nowrap}
 .copy-total-icon,.copy-total-text{display:none}
-/* V7.2 top packing entry: single-layer card, no pill-in-pill */
+/* V7.3 top packing entry: single-layer card, no pill-in-pill */
 .header-packing{min-width:220px;max-width:360px;margin-top:4px;border:1px solid #BFDBFE;background:#F8FBFF;border-radius:18px;overflow:hidden;box-shadow:0 6px 14px rgba(9,105,218,.06)}
 .header-packing summary{border:0!important;border-radius:0!important;background:#F8FBFF!important;box-shadow:none!important;padding:14px 16px!important;text-align:center;line-height:1.35;color:#2563EB;font-weight:900}
 .header-packing[open] summary{border-radius:0!important;border-bottom:1px solid #BFDBFE!important}
@@ -132,6 +132,32 @@ details.more .more-body{padding:14px}
 }
 @media(max-width:768px){.field-hint{font-size:12px;margin-top:7px}}
 @media(max-width:360px){.card{padding:18px 12px}label{font-size:13px}select,input{font-size:15px;padding:0 8px}.field-card{padding:9px}.total-rmb{font-size:25px}.total-usd{font-size:20px}}
+
+/* V7.3 copy success toast */
+.copy-toast{
+  position:fixed;
+  left:50%;
+  bottom:28px;
+  transform:translateX(-50%) translateY(12px);
+  background:rgba(15,23,42,.92);
+  color:#fff;
+  padding:10px 16px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:700;
+  line-height:1;
+  box-shadow:0 12px 28px rgba(15,23,42,.22);
+  opacity:0;
+  pointer-events:none;
+  z-index:9999;
+  transition:opacity .18s ease, transform .18s ease;
+  white-space:nowrap;
+}
+.copy-toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
 </style>
 </head>
 <body>
@@ -139,7 +165,7 @@ details.more .more-body{padding:14px}
 <div class="top-head">
   <div class="title-block">
     <h1>Beauty Ship Express 美邮购</h1>
-    <div class="sub"><span class="member-level">VIP3 电商会员</span><span class="calc-version">｜专属报价计算器 V7.2</span></div>
+    <div class="sub"><span class="member-level">VIP3 电商会员</span><span class="calc-version">｜专属报价计算器 V7.3</span></div>
   </div>
   <details class="packing-all header-packing" id="allPackingWrap">
     <summary id="allPackingSummary"><span class="mainline">▶ 📚 各线路装箱要求</span><span class="subline">点击展开</span></summary>
@@ -229,7 +255,7 @@ details.more .more-body{padding:14px}
 </div></div>
 <script>
 const MEMBER_TITLE="VIP3 电商会员";
-const VERSION='V7.2';
+const VERSION='V7.3';
 const ROUTES=[{"code":"A","name":"普货/保健品/日用品/奶粉","rate":5.3,"minWeight":0},{"code":"B","name":"服装类","rate":5.3,"minWeight":0},{"code":"C","name":"二线护肤品/鞋服/饰品","rate":7.5,"minWeight":0},{"code":"C1","name":"二线箱包","rate":10.0,"minWeight":0},{"code":"E","name":"普通鞋类","rate":5.3,"minWeight":0},{"code":"D","name":"液体水奶","rate":5.3,"minWeight":0},{"code":"W","name":"普通手表","rate":10.0,"minWeight":2},{"code":"H","name":"小家电/胃药","rate":8.5,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
 
 const PACKING_RULES={
@@ -376,6 +402,7 @@ ${MEMBER_TITLE}｜专属报价计算器 ${VERSION}
   return true;
 }
 async function cp(t){try{await navigator.clipboard.writeText(t);alert('已复制')}catch(e){prompt('请手动复制',t)}}
+showCopyToast('✓ 已复制完整报价单');
 function copyTotal(){if(!lastTotal){if(!calc())return;} cp(lastTotal)}
 function copyWechat(){if(!lastText){if(!calc())return;} cp(lastText)}
 init();
@@ -383,6 +410,25 @@ initAllPackingRules();
 updateAllPackingSummary();
 updatePackingRules();
 calc(true);
+
+// V7.3 copy success toast
+let copyToastTimer=null;
+function showCopyToast(message){
+  let toast=document.getElementById('copyToast');
+  if(!toast){
+    toast=document.createElement('div');
+    toast.id='copyToast';
+    toast.className='copy-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent=message || '✓ 已复制报价';
+  toast.classList.add('show');
+  if(copyToastTimer) clearTimeout(copyToastTimer);
+  copyToastTimer=setTimeout(function(){
+    toast.classList.remove('show');
+  },1000);
+}
+
 </script>
 </body>
 </html>
