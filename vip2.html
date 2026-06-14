@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Beauty Ship Express VIP2 代购会员 专属报价计算器 V7.0</title>
+<title>Beauty Ship Express VIP2 代购会员 专属报价计算器 V7.1</title>
 <style>
 :root{--blue:#0969da;--dark:#0f1b2d;--muted:#667085;--line:#d9e2ef;--bg:#f3f7ff;--card:#fff;--soft:#eef5ff;--danger:#d21f52;}
 *{box-sizing:border-box}
@@ -54,9 +54,9 @@ details.more .more-body{padding:14px}
 .result{margin-top:24px;border:1px solid #cfe0f8;background:#f7fbff;border-radius:22px;padding:22px;display:none}
 .total-grid{display:grid;grid-template-columns:4fr 3fr 3fr;gap:10px;margin-bottom:18px}
 .total-card{background:#fff;border:1px solid #dbe7f7;border-radius:18px;padding:16px 12px}
-.copy-total-card{background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;border-radius:18px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;line-height:1.15;min-height:88px;box-shadow:0 6px 14px rgba(9,105,218,.08);white-space:normal;gap:6px}
-.copy-total-text{font-size:20px;font-weight:1000;line-height:1.1;color:#DC2626}
-.copy-label{color:#667085;margin-bottom:6px}
+.copy-total-card{background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;border-radius:18px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;line-height:1.15;min-height:88px;box-shadow:0 6px 14px rgba(9,105,218,.08);white-space:normal;gap:6px}
+.copy-total-icon{font-size:24px;line-height:1}
+.copy-total-text{font-size:17px;font-weight:1000;line-height:1.1}
 .total-label{font-size:13px;color:#667085;font-weight:800;margin-bottom:6px;line-height:1.25}
 .total-rmb{font-size:36px;font-weight:1000;color:#d21f52;line-height:1}
 .total-usd{font-size:30px;font-weight:1000;color:#0969da;line-height:1}
@@ -69,7 +69,7 @@ details.more .more-body{padding:14px}
 .packing-current{grid-column:1/-1;border:1px solid #cfe0f8;background:#f7fbff;border-radius:18px;padding:0;overflow:hidden}
 .packing-current summary{cursor:pointer;list-style:none;font-size:14px;font-weight:850;color:#0969da;padding:12px 14px;background:#eef5ff;border-bottom:1px solid #dbe7f7}
 .packing-all summary{cursor:pointer;list-style:none;font-size:14px;font-weight:850;text-align:center;color:#2563EB;padding:10px 14px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:999px;line-height:1.35;box-shadow:0 6px 14px rgba(9,105,218,.06)}
-.header-packing{min-width:0;max-width:260px;margin-top:4px;border:0;background:transparent;border-radius:0;overflow:visible;flex:0 0 auto}
+.header-packing{min-width:220px;max-width:360px;margin-top:4px;border:0;background:transparent;border-radius:0;overflow:visible}
 .header-packing[open] summary{border-radius:18px 18px 0 0}
 .header-packing .packing-all-body{border:1px solid #BFDBFE;border-top:0;border-radius:0 0 18px 18px;box-shadow:0 10px 24px rgba(9,105,218,.10);max-height:430px;overflow:auto}
 .packing-all summary .mainline{display:block;text-align:center}.packing-all summary .subline{display:block;text-align:center;font-size:12px;font-weight:800;color:#64748b;margin-top:3px}
@@ -83,10 +83,23 @@ details.more .more-body{padding:14px}
 .packing-line{border:1px solid #e5edf8;border-radius:14px;padding:11px 12px;margin-bottom:10px;background:#fbfdff}
 .packing-line:last-child{margin-bottom:0}
 .packing-line .packing-title{margin-bottom:5px;color:#0969da}
-@media(max-width:768px){.top-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.title-block{flex:1 1 100%}.header-packing{max-width:260px;width:auto;margin:8px 0 16px;display:inline-block}.packing-current summary,.packing-all summary{font-size:14px;padding:12px}.packing-box{padding:12px}.packing-box ul{font-size:13px;line-height:1.65}.packing-line{padding:10px}}
+
+/* V7.1 result cards: unified title → content structure */
+.total-card{min-height:96px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.copy-total-card{min-height:96px;background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;border-radius:18px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;line-height:1.15;box-shadow:0 6px 14px rgba(9,105,218,.08);white-space:normal;gap:7px}
+.copy-total-label{color:#667085;margin:0;font-size:13px;font-weight:800;line-height:1.25;text-align:center}
+.copy-total-action{font-size:30px;font-weight:1000;color:#DC2626;line-height:1;white-space:nowrap}
+.copy-total-icon,.copy-total-text{display:none}
+/* V7.1 top packing entry: single-layer card, no pill-in-pill */
+.header-packing{min-width:220px;max-width:360px;margin-top:4px;border:1px solid #BFDBFE;background:#F8FBFF;border-radius:18px;overflow:hidden;box-shadow:0 6px 14px rgba(9,105,218,.06)}
+.header-packing summary{border:0!important;border-radius:0!important;background:#F8FBFF!important;box-shadow:none!important;padding:14px 16px!important;text-align:center;line-height:1.35;color:#2563EB;font-weight:900}
+.header-packing[open] summary{border-radius:0!important;border-bottom:1px solid #BFDBFE!important}
+.header-packing .packing-all-body{border:0!important;border-top:0!important;border-radius:0!important;box-shadow:none!important;max-height:430px;overflow:auto;background:#fff}
+
+@media(max-width:768px){.top-head{display:block}.header-packing{max-width:none;margin:12px 0 16px}.packing-current summary,.packing-all summary{font-size:14px;padding:12px}.packing-box{padding:12px}.packing-box ul{font-size:13px;line-height:1.65}.packing-line{padding:10px}}
 
 @media(max-width:768px){
-  .wrap{padding:10px 8px 22px}.card{border-radius:22px;padding:22px 16px}h1{font-size:24px;white-space:normal}.sub{font-size:15px}
+  .wrap{padding:10px 8px 22px}.card{border-radius:22px;padding:22px 16px}h1{font-size:26px;white-space:normal}.sub{font-size:16px}
   .form-grid{grid-template-columns:1fr 1fr;gap:10px}
   .field-card{border-radius:18px;padding:11px}
   label{font-size:14px;margin-bottom:7px;min-height:auto}
@@ -103,12 +116,16 @@ details.more .more-body{padding:14px}
   .special-row span{font-size:14px}
   .special-desc{font-size:12px}
   .copy-main{height:62px;font-size:21px}.copy-dark{background:#FFF7ED;color:#EA580C;border:1px solid #FDBA74;margin:16px auto 0;width:100%;height:58px;padding:0 18px;border-radius:16px;font-size:18px;font-weight:950;display:block;box-shadow:0 6px 14px rgba(234,88,12,.10)}
+
+  .total-card,.copy-total-card{min-height:74px;padding:12px 6px}
+  .copy-total-label{font-size:11px}
+  .copy-total-action{font-size:21px}
   .result{padding:16px}
   .total-grid{gap:6px}
   .total-card{padding:12px 6px}
   .copy-total-card{min-height:74px;padding:10px 5px;gap:4px}
+  .copy-total-icon{font-size:22px}
   .copy-total-text{font-size:16px}
-  .copy-label{font-size:11px}
   .total-rmb{font-size:25px}.total-usd{font-size:20px}
   .total-label{font-size:11px}
   .row{font-size:15px;padding:10px 0}
@@ -122,7 +139,7 @@ details.more .more-body{padding:14px}
 <div class="top-head">
   <div class="title-block">
     <h1>Beauty Ship Express 美邮购华人快递</h1>
-    <div class="sub"><span class="member-level">VIP2 代购会员</span><span class="calc-version">｜专属报价计算器 V7.0</span></div>
+    <div class="sub"><span class="member-level">VIP2 代购会员</span><span class="calc-version">｜专属报价计算器 V7.1</span></div>
   </div>
   <details class="packing-all header-packing" id="allPackingWrap">
     <summary id="allPackingSummary"><span class="mainline">▶ 📚 各线路装箱要求</span><span class="subline">点击展开</span></summary>
@@ -202,17 +219,17 @@ details.more .more-body{padding:14px}
 <div class="result" id="result">
   <div class="total-grid">
     <div class="total-card"><div class="total-label">人民币总价</div><div class="total-rmb" id="rmbTotal">¥0.0</div></div>
-    <div class="copy-total-card" onclick="copyTotal()"><div class="total-label copy-label">复制报价</div><div class="copy-total-text">点击复制</div></div>
+    <div class="copy-total-card" onclick="copyTotal()"><div class="total-label copy-total-label">复制报价</div><div class="copy-total-action">📋复制</div></div>
     <div class="total-card"><div class="total-label">运费成本</div><div class="total-usd" id="usdTotal">$0.0</div></div>
   </div>
   <div class="detail-table" id="detailTable"></div>
 </div>
 <button class="copy-dark" onclick="copyWechat()">📋 复制完整报价单</button>
-<div class="notice">计费规则：A/B/C/C1/D/E/H 为实际计重，1.0磅起计费；超过1.0磅按实重收费。0.1磅为最小计费单位，不足0.1磅按0.1磅进位计算。W线为跳磅进位整取，2磅起计费；U线为跳磅进位整取，30磅起计费。特别说明：运费成本显示真实运费成本，包含国际运费、操作费/打包费、特殊地区派送费和身份证照片附加服务费，不包含商品价值、固定利润（USD）和固定利润（RMB）；最终客户报价请以人民币总价为准。美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
+<div class="notice">计费规则：A/B/C/C1/D/E/H 为实际计重，1.0磅起计费；超过1.0磅按实重收费。0.1磅为最小计费单位，不足0.1磅按0.1磅进位计算。W线为跳磅进位整取，2磅起计费；U线为跳磅进位整取，30磅起计费。特别说明：美元总价显示真实运费成本，包含国际运费、操作费/打包费、特殊地区派送费和身份证照片附加服务费，不包含商品价值、固定利润（USD）和固定利润（RMB）；最终客户报价请以人民币总价为准。美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
 </div></div>
 <script>
 const MEMBER_TITLE="VIP2 代购会员";
-const VERSION='V7.0';
+const VERSION='V6.9';
 const ROUTES=[{"code":"A","name":"普货/保健品/日用品/奶粉","rate":5.5,"minWeight":0},{"code":"B","name":"服装类","rate":5.5,"minWeight":0},{"code":"C","name":"二线护肤品/鞋服/饰品","rate":7.5,"minWeight":0},{"code":"C1","name":"二线箱包","rate":10.5,"minWeight":0},{"code":"E","name":"普通鞋类","rate":6.0,"minWeight":0},{"code":"D","name":"液体水奶","rate":5.5,"minWeight":0},{"code":"W","name":"普通手表","rate":10.0,"minWeight":2},{"code":"H","name":"小家电/胃药","rate":9.0,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
 
 const PACKING_RULES={
