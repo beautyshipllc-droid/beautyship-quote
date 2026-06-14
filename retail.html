@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Beauty Ship Express 普通会员 专属报价计算器 V6.8</title>
+<title>Beauty Ship Express 普通会员 专属报价计算器 V6.9</title>
 <style>
 :root{--blue:#0969da;--dark:#0f1b2d;--muted:#667085;--line:#d9e2ef;--bg:#f3f7ff;--card:#fff;--soft:#eef5ff;--danger:#d21f52;}
 *{box-sizing:border-box}
@@ -122,7 +122,7 @@ details.more .more-body{padding:14px}
 <div class="top-head">
   <div class="title-block">
     <h1>Beauty Ship Express 美邮购</h1>
-    <div class="sub"><span class="member-level">普通会员</span><span class="calc-version">｜专属报价计算器 V6.8</span></div>
+    <div class="sub"><span class="member-level">普通会员</span><span class="calc-version">｜专属报价计算器 V6.9</span></div>
     <div class="pill">独立报价页面</div>
   </div>
   <details class="packing-all header-packing" id="allPackingWrap">
@@ -204,7 +204,7 @@ details.more .more-body{padding:14px}
   <div class="total-grid">
     <div class="total-card"><div class="total-label">人民币总价</div><div class="total-rmb" id="rmbTotal">¥0.0</div></div>
     <div class="copy-total-card" onclick="copyTotal()"><div class="copy-total-icon">📋</div><div class="copy-total-text">复制报价</div></div>
-    <div class="total-card"><div class="total-label">美元总价（运费成本）</div><div class="total-usd" id="usdTotal">$0.0</div></div>
+    <div class="total-card"><div class="total-label">运费成本</div><div class="total-usd" id="usdTotal">$0.0</div></div>
   </div>
   <div class="detail-table" id="detailTable"></div>
 </div>
@@ -213,7 +213,7 @@ details.more .more-body{padding:14px}
 </div></div>
 <script>
 const MEMBER_TITLE="普通会员";
-const VERSION='V6.8';
+const VERSION='V6.9';
 const ROUTES=[{"code":"A","name":"普货/保健品/日用品/奶粉","rate":7.0,"minWeight":0},{"code":"B","name":"服装类","rate":7.0,"minWeight":0},{"code":"C","name":"二线护肤品/鞋服/饰品","rate":9.0,"minWeight":0},{"code":"C1","name":"二线箱包","rate":12.0,"minWeight":0},{"code":"E","name":"普通鞋类","rate":7.5,"minWeight":0},{"code":"D","name":"液体水奶","rate":6.0,"minWeight":0},{"code":"W","name":"普通手表","rate":10.0,"minWeight":2},{"code":"H","name":"小家电/胃药","rate":9.5,"minWeight":0},{"code":"U","name":"回国行李","rate":7.5,"minWeight":30}];
 
 const PACKING_RULES={
@@ -225,7 +225,7 @@ const PACKING_RULES={
   E:{title:'📦 E线装箱要求',rules:['每箱限1双鞋','不可混装其他商品','单票价值≤$100']},
   H:{title:'📦 H线装箱要求',rules:['电子产品最多1件','电子产品价值≤$200','胃药最多3组','需提供身份证资料']},
   W:{title:'📦 W线装箱要求',rules:['每箱限1块手表','单票价值≤$200','2磅起计费','整磅进位计费']},
-  U:{title:'📦 U线装箱要求（回国行李）',rules:['仅限个人旧衣旧物','30磅起运','单箱≤50磅','不可寄全新商品','不可寄包包、化妆品、电子产品']}
+  U:{title:'📦 U线装箱要求（回国行李）',rules:['仅限个人旧衣旧物','30磅起运','单箱≤50磅','不可寄全新商品','不可寄包包、液体、粉末','不可寄处方药、电子产品']}
 };
 function packingHtml(item, withNote=false){
   if(!item) return '';
@@ -336,7 +336,7 @@ function calc(silent=false){
   const mode=minW>0?`跳磅进位整取，${minW} lb起`:'实际计重，1.0 lb起，0.1 lb进位';
   $('rmbTotal').innerText=`¥${money(rmbTotal)}`; $('usdTotal').innerText=`$${money(usdCost)}`;
   const rows=[
-    ['当前线路',`${r.code}｜${r.name}`],['计费模式',mode],['起步重量',`${minW||1} lb`],['实际重量',`${money(w)} lb`],['计费重量',`${bill} lb`],['运费单价',`$${money(r.rate)}/lb（每磅）`],['国际运费',`$${money(freight)}`],['美元总价（运费成本）',`$${money(usdCost)}`],['商品价值',`$${money(value)}`],['操作费 / 打包费',`$${money(op)}`],...(specialFee>0?[['特殊地区派送费',`$${money(specialFee)}`]]:[]),...(idPhotoServiceFee>0?[['未提供身份证照片',`$${money(idPhotoServiceFee)}`]]:[]),['固定利润（USD 美元）',`$${money(profitUsd)}`],['固定利润（RMB 人民币）',`¥${money(profitRmb)}`],['美元兑人民币汇率',`${money(fx)}`]
+    ['当前线路',`${r.code}｜${r.name}`],['计费模式',mode],['起步重量',`${minW||1} lb`],['实际重量',`${money(w)} lb`],['计费重量',`${bill} lb`],['运费单价',`$${money(r.rate)}/lb（每磅）`],['国际运费',`$${money(freight)}`],['运费成本',`$${money(usdCost)}`],['商品价值',`$${money(value)}`],['操作费 / 打包费',`$${money(op)}`],...(specialFee>0?[['特殊地区派送费',`$${money(specialFee)}`]]:[]),...(idPhotoServiceFee>0?[['未提供身份证照片',`$${money(idPhotoServiceFee)}`]]:[]),['固定利润（USD 美元）',`$${money(profitUsd)}`],['固定利润（RMB 人民币）',`¥${money(profitRmb)}`],['美元兑人民币汇率',`${money(fx)}`]
   ];
   $('detailTable').innerHTML=rows.map(([k,v])=>`<div class="row"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
   $('result').style.display='block';
@@ -355,7 +355,7 @@ ${MEMBER_TITLE}｜专属报价计算器 ${VERSION}
 固定利润（USD 美元）：$${money(profitUsd)}
 固定利润（RMB 人民币）：¥${money(profitRmb)}
 美元兑人民币汇率：${money(fx)}
-美元总价（运费成本）：$${money(usdCost)}
+运费成本：$${money(usdCost)}
 人民币总价：¥${money(rmbTotal)}`;
   return true;
 }
