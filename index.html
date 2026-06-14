@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;color:#111}.container{background:#fff;max-width:650px;width:100%;border-radius:20px;padding:40px 30px;box-shadow:0 10px 30px rgba(0,0,0,.08);text-align:center}.logo{font-size:32px;font-weight:800;color:#d60000;margin-bottom:10px}.subtitle{font-size:24px;font-weight:800;color:#222;margin-bottom:25px}.line{height:1px;background:#eee;margin:25px 0}.desc{color:#555;font-size:16px;line-height:1.8}.feature{text-align:left;display:inline-block;margin-top:18px;line-height:2;font-size:17px;color:#333}.member{margin-top:15px;color:#555;line-height:1.8}.contact{margin-top:20px;font-size:18px;line-height:2;font-weight:700;color:#111}.footer{margin-top:25px;color:#999;font-size:14px}@media(max-width:600px){.container{padding:34px 22px}.logo{font-size:28px}.subtitle{font-size:22px}.feature{font-size:16px}}
 
-/* V7.6.2 copy success toast - safe */
+/* V7.6.4 copy success toast - safe */
 .copy-toast{
   position:fixed;
   left:50%;
@@ -33,7 +33,7 @@
 }
 
 
-/* V7.6.2 safety reminders */
+/* V7.6.4 safety reminders */
 .weight-alert{
   display:none;
   margin-top:8px;
@@ -59,7 +59,7 @@
 }
 
 
-/* V7.6.2 value and rule emphasis */
+/* V7.6.4 value and rule emphasis */
 .value-alert{
   display:none;
   margin-top:8px;
@@ -79,11 +79,120 @@
 }
 
 
-/* V7.6.2 clear current ticket */
+/* V7.6.4 clear current ticket */
 .clear-ticket-wrap{grid-column:1/-1;display:flex;justify-content:center;margin:2px 0 2px}
 .clear-ticket-btn{height:42px;padding:0 18px;border-radius:999px;border:1px solid #CBD5E1;background:#F8FAFC;color:#475569;font-size:14px;font-weight:900;box-shadow:0 4px 12px rgba(15,55,110,.05)}
 .clear-ticket-btn:active{transform:scale(.98)}
 @media(max-width:768px){.clear-ticket-btn{height:38px;font-size:13px;padding:0 16px}.clear-ticket-wrap{margin:0}}
+
+
+/* V7.6.4 result area: 2 rows, 3:1 money/action layout */
+.result-pair{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:18px;
+}
+.result-row{
+  display:grid;
+  grid-template-columns:3fr 1fr;
+  gap:10px;
+  align-items:stretch;
+}
+.result-money{
+  background:#fff;
+  border:1px solid #dbe7f7;
+  border-radius:18px;
+  padding:15px 14px;
+  min-height:88px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+}
+.result-action{
+  border-radius:18px;
+  min-height:88px;
+  padding:10px 6px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  line-height:1.12;
+  font-size:16px;
+  font-weight:1000;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(15,55,110,.06);
+}
+.copy-result-action{
+  background:#EFF6FF;
+  border:1px solid #BFDBFE;
+  color:#DC2626;
+}
+.clear-result-action{background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;}
+.result-action:active{transform:scale(.98)}
+@media(max-width:768px){
+  .result-pair{gap:8px;margin-bottom:16px}
+  .result-row{grid-template-columns:3fr 1fr;gap:8px}
+  .result-money{min-height:76px;padding:12px 10px}
+  .result-action{min-height:76px;font-size:15px;border-radius:16px}
+  .total-rmb,.total-usd{font-size:28px}
+}
+@media(max-width:360px){
+  .result-row{gap:6px}
+  .result-money{padding:10px 8px}
+  .result-action{font-size:14px}
+  .total-rmb,.total-usd{font-size:25px}
+}
+
+
+/* V7.6.4 result area compact adjustment */
+.result-pair{
+  gap:8px !important;
+  margin-bottom:14px !important;
+}
+.result-row{
+  grid-template-columns:3fr 1fr !important;
+  gap:8px !important;
+}
+.result-money{
+  min-height:68px !important;
+  padding:10px 14px !important;
+  border-radius:16px !important;
+}
+.result-action{
+  min-height:68px !important;
+  padding:8px 6px !important;
+  border-radius:16px !important;
+  font-size:15px !important;
+  line-height:1.12 !important;
+}
+.copy-result-action,
+.clear-result-action{
+  background:#EFF6FF !important;
+  border:1px solid #BFDBFE !important;
+  color:#DC2626 !important;
+}
+.total-label{
+  margin-bottom:4px !important;
+}
+.total-rmb,.total-usd{
+  line-height:1.05 !important;
+}
+@media(max-width:768px){
+  .result-pair{gap:7px !important;margin-bottom:12px !important;}
+  .result-row{gap:7px !important;}
+  .result-money{min-height:62px !important;padding:9px 10px !important;border-radius:15px !important;}
+  .result-action{min-height:62px !important;font-size:14px !important;border-radius:15px !important;}
+  .total-rmb,.total-usd{font-size:26px !important;}
+}
+@media(max-width:360px){
+  .result-row{gap:6px !important;}
+  .result-money{min-height:58px !important;padding:8px 8px !important;}
+  .result-action{min-height:58px !important;font-size:13px !important;}
+  .total-rmb,.total-usd{font-size:24px !important;}
+}
 
 </style>
 </head>
