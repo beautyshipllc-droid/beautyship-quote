@@ -138,7 +138,7 @@ details.more .more-body{padding:14px}
 <div class="wrap"><div class="card">
 <div class="top-head">
   <div class="title-block">
-    <h1>Beauty Ship Express 美邮购快递</h1>
+    <h1>Beauty Ship Express 美邮购</h1>
     <div class="sub"><span class="member-level">VIP3 电商会员</span><span class="calc-version">｜专属报价计算器 V7.1</span></div>
   </div>
   <details class="packing-all header-packing" id="allPackingWrap">
@@ -220,12 +220,12 @@ details.more .more-body{padding:14px}
   <div class="total-grid">
     <div class="total-card"><div class="total-label">人民币总价</div><div class="total-rmb" id="rmbTotal">¥0.0</div></div>
     <div class="copy-total-card" onclick="copyTotal()"><div class="total-label copy-total-label">复制报价</div><div class="copy-total-action">📋复制</div></div>
-    <div class="total-card"><div class="total-label">运费成本</div><div class="total-usd" id="usdTotal">$0.0</div></div>
+    <div class="total-card"><div class="total-label">运费总价</div><div class="total-usd" id="usdTotal">$0.0</div></div>
   </div>
   <div class="detail-table" id="detailTable"></div>
 </div>
 <button class="copy-dark" onclick="copyWechat()">📋 复制完整报价单</button>
-<div class="notice">计费规则：A/B/C/C1/D/E/H 为实际计重，1.0磅起计费；超过1.0磅按实重收费。0.1磅为最小计费单位，不足0.1磅按0.1磅进位计算。W线为跳磅进位整取，2磅起计费；U线为跳磅进位整取，30磅起计费。特别说明：美元总价显示真实运费成本，包含国际运费、操作费/打包费、特殊地区派送费和身份证照片附加服务费，不包含商品价值、固定利润（USD）和固定利润（RMB）；最终客户报价请以人民币总价为准。美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
+<div class="notice">计费规则：A/B/C/C1/D/E/H 为实际计重，1.0磅起计费；超过1.0磅按实重收费。0.1磅为最小计费单位，不足0.1磅按0.1磅进位计算。W线为跳磅进位整取，2磅起计费；U线为跳磅进位整取，30磅起计费。特别说明：美元金额显示真实运费总价，包含国际运费、操作费/打包费、特殊地区派送费和身份证照片附加服务费，不包含商品价值、固定利润（USD）和固定利润（RMB）；最终客户报价请以人民币总价为准。美元兑人民币汇率、固定利润和操作费/打包费会自动记住。</div>
 </div></div>
 <script>
 const MEMBER_TITLE="VIP3 电商会员";
@@ -352,7 +352,7 @@ function calc(silent=false){
   const mode=minW>0?`跳磅进位整取，${minW} lb起`:'实际计重，1.0 lb起，0.1 lb进位';
   $('rmbTotal').innerText=`¥${money(rmbTotal)}`; $('usdTotal').innerText=`$${money(usdCost)}`;
   const rows=[
-    ['当前线路',`${r.code}｜${r.name}`],['计费模式',mode],['起步重量',`${minW||1} lb`],['实际重量',`${money(w)} lb`],['计费重量',`${bill} lb`],['运费单价',`$${money(r.rate)}/lb（每磅）`],['国际运费',`$${money(freight)}`],['运费成本',`$${money(usdCost)}`],['商品价值',`$${money(value)}`],['操作费 / 打包费',`$${money(op)}`],...(specialFee>0?[['特殊地区派送费',`$${money(specialFee)}`]]:[]),...(idPhotoServiceFee>0?[['未提供身份证照片',`$${money(idPhotoServiceFee)}`]]:[]),['固定利润（USD 美元）',`$${money(profitUsd)}`],['固定利润（RMB 人民币）',`¥${money(profitRmb)}`],['美元兑人民币汇率',`${money(fx)}`]
+    ['当前线路',`${r.code}｜${r.name}`],['计费模式',mode],['起步重量',`${minW||1} lb`],['实际重量',`${money(w)} lb`],['计费重量',`${bill} lb`],['运费单价',`$${money(r.rate)}/lb（每磅）`],['国际运费',`$${money(freight)}`],['运费总价',`$${money(usdCost)}`],['商品价值',`$${money(value)}`],['操作费 / 打包费',`$${money(op)}`],...(specialFee>0?[['特殊地区派送费',`$${money(specialFee)}`]]:[]),...(idPhotoServiceFee>0?[['未提供身份证照片',`$${money(idPhotoServiceFee)}`]]:[]),['固定利润（USD 美元）',`$${money(profitUsd)}`],['固定利润（RMB 人民币）',`¥${money(profitRmb)}`],['美元兑人民币汇率',`${money(fx)}`]
   ];
   $('detailTable').innerHTML=rows.map(([k,v])=>`<div class="row"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
   $('result').style.display='block';
@@ -371,7 +371,7 @@ ${MEMBER_TITLE}｜专属报价计算器 ${VERSION}
 固定利润（USD 美元）：$${money(profitUsd)}
 固定利润（RMB 人民币）：¥${money(profitRmb)}
 美元兑人民币汇率：${money(fx)}
-运费成本：$${money(usdCost)}
+运费总价：$${money(usdCost)}
 人民币总价：¥${money(rmbTotal)}`;
   return true;
 }
