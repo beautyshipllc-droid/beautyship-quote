@@ -54,7 +54,9 @@ details.more .more-body{padding:14px}
 .result{margin-top:24px;border:1px solid #cfe0f8;background:#f7fbff;border-radius:22px;padding:22px;display:none}
 .total-grid{display:grid;grid-template-columns:4fr 3fr 3fr;gap:10px;margin-bottom:18px}
 .total-card{background:#fff;border:1px solid #dbe7f7;border-radius:18px;padding:16px 12px}
-.copy-total-card{background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;border-radius:18px;padding:16px 10px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:20px;font-weight:1000;cursor:pointer;line-height:1.15;min-height:88px;box-shadow:0 6px 14px rgba(9,105,218,.08);white-space:normal}
+.copy-total-card{background:#EFF6FF;border:1px solid #BFDBFE;color:#DC2626;border-radius:18px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;line-height:1.15;min-height:88px;box-shadow:0 6px 14px rgba(9,105,218,.08);white-space:normal;gap:6px}
+.copy-total-icon{font-size:24px;line-height:1}
+.copy-total-text{font-size:17px;font-weight:1000;line-height:1.1}
 .total-label{font-size:13px;color:#667085;font-weight:800;margin-bottom:6px;line-height:1.25}
 .total-rmb{font-size:36px;font-weight:1000;color:#d21f52;line-height:1}
 .total-usd{font-size:30px;font-weight:1000;color:#0969da;line-height:1}
@@ -104,7 +106,9 @@ details.more .more-body{padding:14px}
   .result{padding:16px}
   .total-grid{gap:6px}
   .total-card{padding:12px 6px}
-  .copy-total-card{min-height:74px;font-size:16px;padding:12px 5px}
+  .copy-total-card{min-height:74px;padding:10px 5px;gap:4px}
+  .copy-total-icon{font-size:22px}
+  .copy-total-text{font-size:16px}
   .total-rmb{font-size:25px}.total-usd{font-size:20px}
   .total-label{font-size:11px}
   .row{font-size:15px;padding:10px 0}
@@ -199,7 +203,7 @@ details.more .more-body{padding:14px}
 <div class="result" id="result">
   <div class="total-grid">
     <div class="total-card"><div class="total-label">人民币总价</div><div class="total-rmb" id="rmbTotal">¥0.0</div></div>
-    <div class="copy-total-card" onclick="copyTotal()">👈 复制报价📋</div>
+    <div class="copy-total-card" onclick="copyTotal()"><div class="copy-total-icon">📋</div><div class="copy-total-text">复制报价</div></div>
     <div class="total-card"><div class="total-label">美元总价（运费成本）</div><div class="total-usd" id="usdTotal">$0.0</div></div>
   </div>
   <div class="detail-table" id="detailTable"></div>
